@@ -16,10 +16,9 @@ public class CSVBookParserImpl implements BookParser {
 
     @Override
     public List<Book> toBooks(List<String> lines) {
-        BookParser bookParser = new CSVBookParserImpl();
         List<Book> library = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++){
-            library.add(bookParser.toBook(lines.get(i)));
+            library.add(toBook(lines.get(i)));
         }
         return library;
     }
@@ -38,10 +37,9 @@ public class CSVBookParserImpl implements BookParser {
 
     @Override
     public List<String> fromBooks(List<Book> library) {
-        BookParser bookParser = new CSVBookParserImpl();
         List<String> lines = new ArrayList<>();
         for (int i = 0; i < library.size(); i++){
-            lines.add(bookParser.fromBook(library.get(i)));
+            lines.add(fromBook(library.get(i)));
         }
         return lines;
     }
