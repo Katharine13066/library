@@ -27,11 +27,11 @@ public class CSVBookParserImpl implements BookParser {
     public String fromBook(Book book) {
         String delimeter = ",";
         StringBuilder sb = new StringBuilder("");
-        String line = (sb.append(book.getId()) + delimeter +
-                book.getName() + delimeter +
-                book.getAuthor() + delimeter +
+        String line = (sb.append(book.getBookID() + delimeter +
+                book.getBookName() + delimeter +
+                book.getAuthorID() + delimeter +
                 book.getPublisher() + delimeter +
-                book.getPublicationDate()+"\n").toString();
+                book.getPublicationDate()+"\n")).toString();
         return line;
     }
 

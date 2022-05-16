@@ -1,50 +1,51 @@
 package by.intexsoft.study.model;
 
 public class Book {
-    private String id;
-    private String name;
-    private String author;
+    private String bookID;
+    private String bookName;
+    private String authorID;
     private String publisher;
     private String publicationDate;
 
     public Book(){}
 
-    public Book(String id, String name, String author, String publisher, String publicationDate) {
-        this.id = id;
-        this.name = name;
-        this.author = author;
+    public Book(String bookID, String bookName, String authorID, String publisher, String publicationDate) {
+        this.bookID = bookID;
+        this.bookName = bookName;
+        this.authorID = authorID;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
     }
 
-    public Book(String name, String author, String publisher, String publicationDate) {
-        this.name = name;
-        this.author = author;
+    public Book(String bookName, String authorID, String publisher, String publicationDate) {
+        this.bookName = bookName;
+        this.authorID = authorID;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
     }
-    public String getId() {
-        return id;
+    public String getBookID() {
+        return bookID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
     }
 
-    public String getName() {
-        return name;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-    public String getAuthor() {
-        return author;
+
+    public String getAuthorID() {
+        return authorID;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorID(String authorID) {
+        this.authorID = authorID;
     }
 
     public String getPublisher() {
@@ -65,12 +66,12 @@ public class Book {
 
     @Override
     public String toString() {
-        return "by.intexsoft.study.model.Book{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
+        return "Book{" +
+                "bookID='" + bookID + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", authorID='" + authorID + '\'' +
                 ", publisher='" + publisher + '\'' +
-                ", publicationDate=" + publicationDate +
+                ", publicationDate='" + publicationDate + '\'' +
                 '}';
     }
 }
