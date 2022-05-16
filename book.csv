@@ -1,6 +1,5 @@
-1,name,kate,ls,2000
-3,The Whistler: A Novel,John Grisham,Amazon,2016
-4,The List,Patricia Forde,Amazon,2018
-5,New book,Kate Gorshunova,Intexsoft,2022
-1651758047911,BookName,Author,Publisher,2000
-1651758082577,BookName,Author,Publisher,2000
+1,name,2,ls,2000
+3,The Whistler: A Novel,5,Amazon,2016
+4,The List,4,Amazon,2018
+1652692989284,BookName,4,Publisher,2000
+1652694090690,BookName,4,Publisher,2000

@@ -4,7 +4,6 @@ import by.intexsoft.study.model.Book;
 
 import java.util.List;
 
-public interface Printer {
+public interface BookPrinter {
     public void printBooks(List<Book> library);
-    public void printStringList(List<String> list);
 }
