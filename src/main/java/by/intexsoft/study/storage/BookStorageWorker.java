@@ -9,5 +9,6 @@ public interface BookStorageWorker {
     Book createBook(Book book) throws IOException;
     Book updateBook(Book book) throws IOException;
     void deleteBookById(String id) throws IOException;
+    Book findBookById(String id);
     List<Book> getAllBooks();
 }

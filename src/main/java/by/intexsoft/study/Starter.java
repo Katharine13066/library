@@ -21,7 +21,6 @@ import by.intexsoft.study.storage.impl.BookStorageWorkerImpl;
 
 import java.io.IOException;
 
-import static java.lang.System.out;
 
 public class Starter {
 
@@ -53,6 +52,11 @@ public class Starter {
         bookPrinter.printBooks(bookStorageWorker.getAllBooks());
         System.out.println("\n");
 
+        System.out.println("Find book by id 4");
+        System.out.println(bookStorageWorker.findBookById("4"));
+        System.out.println("\n");
+
+
         AuthorParser authorParser = new CVSAuthorParserImpl();
         CSVReader authorReader = new CSVReaderImpl("author.csv");
         CSVWriter authorWriter = new CSVWriterImpl("author.csv");
@@ -78,6 +82,9 @@ public class Starter {
         authorStorageWorker.deleteAuthorById("1");
         authorPrinter.printAuthors(authorStorageWorker.getAllAuthor());
         System.out.println("\n");
+
+        System.out.println("Find author by id 3");
+        System.out.println(authorStorageWorker.findAuthorById("7"));
 
     }
 }

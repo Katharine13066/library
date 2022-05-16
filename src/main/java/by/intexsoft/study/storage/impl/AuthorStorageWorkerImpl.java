@@ -65,6 +65,22 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
     }
 
     @Override
+    public Author findAuthorById(String id) {
+        List<String> list = reader.readCSV();
+        List<Author> authorList = authorParser.toAuthors(list);
+        Author author = new Author();
+        for (int i = 0; i < authorList.size(); i++){
+            if (authorList.get(i).getAuthorID().equals(id)){
+                author.setAuthorID(authorList.get(i).getAuthorID());
+                author.setAuthorName(authorList.get(i).getAuthorName());
+                author.setPhoneNumber(authorList.get(i).getPhoneNumber());
+                author.setEmail(authorList.get(i).getEmail());
+            }
+        }
+        return author;
+    }
+
+    @Override
     public List<Author> getAllAuthor() {
         List<String> list = reader.readCSV();
         List<Author>authorList = authorParser.toAuthors(list);

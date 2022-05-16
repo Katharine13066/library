@@ -9,5 +9,6 @@ public interface AuthorStorageWorker {
     Author createAuthor(Author author) throws IOException;
     Author updateAuthor(Author author) throws IOException;
     void deleteAuthorById(String id) throws IOException;
+    Author findAuthorById(String id);
     List<Author> getAllAuthor();
 }

@@ -2,6 +2,7 @@ package by.intexsoft.study.storage.impl;
 
 import by.intexsoft.study.fileUtils.CSVReader;
 import by.intexsoft.study.fileUtils.CSVWriter;
+import by.intexsoft.study.model.Author;
 import by.intexsoft.study.model.Book;
 import by.intexsoft.study.parser.BookParser;
 import by.intexsoft.study.storage.BookStorageWorker;
@@ -63,6 +64,23 @@ public class BookStorageWorkerImpl implements BookStorageWorker {
         }
         list = bookParser.fromBooks(library);
         writer.writeCSV(list);
+    }
+
+    @Override
+    public Book findBookById(String id) {
+        List<String> list = reader.readCSV();
+        List<Book> library = bookParser.toBooks(list);
+        Book book = new Book();
+        for (int i = 0; i < library.size(); i++){
+            if (library.get(i).getBookID().equals(id)){
+                book.setBookID(library.get(i).getBookID());
+                book.setBookName(library.get(i).getBookName());
+                book.setAuthorID(library.get(i).getAuthorID());
+                book.setPublisher(library.get(i).getPublisher());
+                book.setPublicationDate(library.get(i).getPublicationDate());
+            }
+        }
+        return book;
     }
 
     @Override
