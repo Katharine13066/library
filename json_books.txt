@@ -1,0 +1,6 @@
+[
+  {"bookID":"1","bookName":"The Reading List: A Novel","authorID":"7","publisher":"Amazon","publicationDate":"2021"},
+  {"bookID":"2","bookName":"Mr. Malcolm's List","authorID":"6","publisher":"Amazon","publicationDate":"2020"},
+  {"bookID":"3","bookName":"The Whistler: A Novel","authorID":"5","publisher":"Amazon","publicationDate":"2016"},
+  {"bookID":"4","bookName":"The List","authorID":"4","publisher":"Amazon","publicationDate":"2018"}
+]

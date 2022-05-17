@@ -1,47 +1,37 @@
 package by.intexsoft.study.storage.impl;
 
-import by.intexsoft.study.fileUtils.CSVReader;
-import by.intexsoft.study.fileUtils.CSVWriter;
+import by.intexsoft.study.fileUtils.JSONBookReader;
+import by.intexsoft.study.fileUtils.JSONBookWriter;
 import by.intexsoft.study.model.Book;
-import by.intexsoft.study.parser.BookParser;
 import by.intexsoft.study.storage.BookStorageWorker;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.List;
 
-public class BookStorageWorkerImpl implements BookStorageWorker {
-    private CSVReader reader;
-    private CSVWriter writer;
-    private BookParser bookParser;
+public class JSONBookStorageWorkerImpl implements BookStorageWorker {
 
-    public BookStorageWorkerImpl() {}
+    private JSONBookReader jsonBookReader;
+    private JSONBookWriter jsonBookWriter;
 
-    public BookStorageWorkerImpl(CSVReader reader, CSVWriter writer, BookParser bookParser) {
-        this.reader = reader;
-        this.writer = writer;
-        this.bookParser = bookParser;
+    public JSONBookStorageWorkerImpl(JSONBookReader jsonBookReader, JSONBookWriter jsonBookWriter) {
+        this.jsonBookReader = jsonBookReader;
+        this.jsonBookWriter = jsonBookWriter;
     }
 
     @Override
     public Book createBook(Book book) throws IOException {
-        List<String> list = reader.readCSV();
-        List<Book> library = bookParser.toBooks(list);
+        List<Book> library = jsonBookReader.readJSON();
         long num = System.currentTimeMillis();
         String id = String.valueOf(num);
         book.setBookID(id.toString());
         library.add(book);
-        list = bookParser.fromBooks(library);
-        writer.writeCSV(list);
+        jsonBookWriter.writeJSON(library);
         return book;
     }
 
     @Override
     public Book updateBook(Book book) throws IOException {
-        List<String> list = reader.readCSV();
-        List<Book> library = bookParser.toBooks(list);
+        List<Book> library = jsonBookReader.readJSON();
         for(int i = 0; i < library.size(); i++){
             if (library.get(i).getBookID().equals(book.getBookID())){
                 library.get(i).setBookName(book.getBookName());
@@ -50,30 +40,26 @@ public class BookStorageWorkerImpl implements BookStorageWorker {
                 library.get(i).setPublicationDate(book.getPublicationDate());
             }
         }
-        list = bookParser.fromBooks(library);
-        writer.writeCSV(list);
+        jsonBookWriter.writeJSON(library);
         return book;
     }
 
     @Override
     public void deleteBookById(String id) throws IOException {
-        List<String> list = reader.readCSV();
-        List<Book> library = bookParser.toBooks(list);
+        List<Book> library = jsonBookReader.readJSON();
         for(int i = 0; i < library.size(); i++){
             if (library.get(i).getBookID().equals(id)){
                 library.remove(i);
             }
         }
-        list = bookParser.fromBooks(library);
-        writer.writeCSV(list);
+        jsonBookWriter.writeJSON(library);
     }
 
     @Override
     public Book findBookById(String id) throws IOException {
-        List<String> list = reader.readCSV();
-        List<Book> library = bookParser.toBooks(list);
+        List<Book> library = jsonBookReader.readJSON();
         Book book = new Book();
-        for(int i = 0; i < library.size(); i++){
+        for (int i = 0; i < library.size(); i++){
             if (library.get(i).getBookID().equals(id)){
                 book.setBookID(library.get(i).getBookID());
                 book.setBookName(library.get(i).getBookName());
@@ -82,17 +68,15 @@ public class BookStorageWorkerImpl implements BookStorageWorker {
                 book.setPublicationDate(library.get(i).getPublicationDate());
             }
         }
-        list = bookParser.fromBooks(library);
-        writer.writeCSV(list);
+        jsonBookWriter.writeJSON(library);
         return book;
     }
 
     @Override
     public Book findBookByAuthorId(String id) throws IOException {
-        List<String> list = reader.readCSV();
-        List<Book> library = bookParser.toBooks(list);
+        List<Book> library = jsonBookReader.readJSON();
         Book book = new Book();
-        for(int i = 0; i < library.size(); i++){
+        for (int i = 0; i < library.size(); i++){
             if (library.get(i).getAuthorID().equals(id)){
                 book.setBookID(library.get(i).getBookID());
                 book.setBookName(library.get(i).getBookName());
@@ -101,15 +85,13 @@ public class BookStorageWorkerImpl implements BookStorageWorker {
                 book.setPublicationDate(library.get(i).getPublicationDate());
             }
         }
-        list = bookParser.fromBooks(library);
-        writer.writeCSV(list);
+        jsonBookWriter.writeJSON(library);
         return book;
     }
 
     @Override
-    public List<Book> getAllBooks() {
-        List<String> list = reader.readCSV();
-        List<Book> library = bookParser.toBooks(list);
+    public List<Book> getAllBooks() throws IOException {
+        List<Book> library = jsonBookReader.readJSON();
         return library;
     }
 }
