@@ -1,7 +1,18 @@
 package by.intexsoft.study;
 
-import by.intexsoft.study.fileUtils.*;
-import by.intexsoft.study.fileUtils.impl.*;
+
+import by.intexsoft.study.fileUtils.CSVReader;
+import by.intexsoft.study.fileUtils.CSVWriter;
+import by.intexsoft.study.fileUtils.JSONAuthorReader;
+import by.intexsoft.study.fileUtils.JSONAuthorWriter;
+import by.intexsoft.study.fileUtils.JSONBookReader;
+import by.intexsoft.study.fileUtils.JSONBookWriter;
+import by.intexsoft.study.fileUtils.impl.CSVReaderImpl;
+import by.intexsoft.study.fileUtils.impl.CSVWriterImpl;
+import by.intexsoft.study.fileUtils.impl.JSONAuthorReaderImpl;
+import by.intexsoft.study.fileUtils.impl.JSONAuthorWriterImpl;
+import by.intexsoft.study.fileUtils.impl.JSONBookReaderImpl;
+import by.intexsoft.study.fileUtils.impl.JSONBookWriterImpl;
 import by.intexsoft.study.model.Author;
 import by.intexsoft.study.model.Book;
 import by.intexsoft.study.parser.AuthorParser;

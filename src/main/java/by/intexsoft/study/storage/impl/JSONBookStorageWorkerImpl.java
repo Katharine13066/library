@@ -68,7 +68,6 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
                 book.setPublicationDate(library.get(i).getPublicationDate());
             }
         }
-        jsonBookWriter.writeJSON(library);
         return book;
     }
 
@@ -85,13 +84,11 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
                 book.setPublicationDate(library.get(i).getPublicationDate());
             }
         }
-        jsonBookWriter.writeJSON(library);
         return book;
     }
 
     @Override
     public List<Book> getAllBooks() throws IOException {
-        List<Book> library = jsonBookReader.readJSON();
-        return library;
+        return jsonBookReader.readJSON();
     }
 }

@@ -77,8 +77,6 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
                 author.setEmail(authorList.get(i).getEmail());
             }
         }
-        list = authorParser.fromAuthors(authorList);
-        writer.writeCSV(list);
         return author;
     }
 

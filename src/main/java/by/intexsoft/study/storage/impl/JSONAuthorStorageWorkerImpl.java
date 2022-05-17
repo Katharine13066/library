@@ -55,7 +55,6 @@ public class JSONAuthorStorageWorkerImpl implements AuthorStorageWorker {
     @Override
     public Author findAuthorById(String id) throws IOException {
         List<Author>authorList = jsonAuthorReader.readJSON();
-        //  Author author = new AuthorProxy();
         Author author = new Author();
         for (int i = 0; i < authorList.size(); i++){
             if (authorList.get(i).getAuthorID().equals(id)){
@@ -65,13 +64,11 @@ public class JSONAuthorStorageWorkerImpl implements AuthorStorageWorker {
                 author.setEmail(authorList.get(i).getEmail());
             }
         }
-        jsonAuthorWriter.writeJSON(authorList);
         return author;
     }
 
     @Override
     public List<Author> getAllAuthor() throws IOException {
-        List<Author>authorList = jsonAuthorReader.readJSON();
-        return authorList;
+        return jsonAuthorReader.readJSON();
     }
 }

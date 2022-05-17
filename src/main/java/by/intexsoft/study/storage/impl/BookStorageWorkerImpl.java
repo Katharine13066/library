@@ -7,9 +7,6 @@ import by.intexsoft.study.parser.BookParser;
 import by.intexsoft.study.storage.BookStorageWorker;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.List;
 
 public class BookStorageWorkerImpl implements BookStorageWorker {
@@ -82,8 +79,6 @@ public class BookStorageWorkerImpl implements BookStorageWorker {
                 book.setPublicationDate(library.get(i).getPublicationDate());
             }
         }
-        list = bookParser.fromBooks(library);
-        writer.writeCSV(list);
         return book;
     }
 
@@ -101,8 +96,6 @@ public class BookStorageWorkerImpl implements BookStorageWorker {
                 book.setPublicationDate(library.get(i).getPublicationDate());
             }
         }
-        list = bookParser.fromBooks(library);
-        writer.writeCSV(list);
         return book;
     }
 
