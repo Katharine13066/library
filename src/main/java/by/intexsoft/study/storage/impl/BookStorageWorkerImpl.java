@@ -66,6 +66,40 @@ public class BookStorageWorkerImpl implements BookStorageWorker {
     }
 
     @Override
+    public Book findBookById(String id) throws IOException {
+        List<String> list = reader.readCSV();
+        List<Book> library = bookParser.toBooks(list);
+        Book book = new Book();
+        for(int i = 0; i < library.size(); i++){
+            if (library.get(i).getBookID().equals(id)){
+                book.setBookID(library.get(i).getBookID());
+                book.setBookName(library.get(i).getBookName());
+                book.setAuthorID(library.get(i).getAuthorID());
+                book.setPublisher(library.get(i).getPublisher());
+                book.setPublicationDate(library.get(i).getPublicationDate());
+            }
+        }
+        return book;
+    }
+
+    @Override
+    public Book findBookByAuthorId(String id) throws IOException {
+        List<String> list = reader.readCSV();
+        List<Book> library = bookParser.toBooks(list);
+        Book book = new Book();
+        for(int i = 0; i < library.size(); i++){
+            if (library.get(i).getAuthorID().equals(id)){
+                book.setBookID(library.get(i).getBookID());
+                book.setBookName(library.get(i).getBookName());
+                book.setAuthorID(library.get(i).getAuthorID());
+                book.setPublisher(library.get(i).getPublisher());
+                book.setPublicationDate(library.get(i).getPublicationDate());
+            }
+        }
+        return book;
+    }
+
+    @Override
     public List<Book> getAllBooks() {
         List<String> list = reader.readCSV();
         List<Book> library = bookParser.toBooks(list);
