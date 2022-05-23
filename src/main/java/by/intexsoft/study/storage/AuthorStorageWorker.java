@@ -1,6 +1,8 @@
 package by.intexsoft.study.storage;
 
+import by.intexsoft.study.filters.Filter;
 import by.intexsoft.study.model.Author;
+import by.intexsoft.study.orders.Order;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,4 +13,7 @@ public interface AuthorStorageWorker {
     void deleteAuthorById(String id) throws IOException;
     Author findAuthorById(String id) throws IOException;
     List<Author> getAllAuthor() throws IOException;
+    List<Author> getAllAuthor(List<Filter> filters) throws IOException, NoSuchMethodException;
+    List<Author> getAllAuthor(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException;
+    List<Author> orderAllAuthor(List<Order> orders) throws IOException, NoSuchMethodException;
 }

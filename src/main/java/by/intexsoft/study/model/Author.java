@@ -10,19 +10,31 @@ public class Author {
 
     String email;
 
+    int age;
+
     public Author(){}
 
-    public Author(String authorID, String authorName, String phoneNumber, String email) {
+    public Author(String authorName, String phoneNumber, String email, int age) {
+        this.authorName = authorName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.age = age;
+    }
+
+    public Author(String authorID, String authorName, String phoneNumber, String email, int age) {
         this.authorID = authorID;
         this.authorName = authorName;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.age = age;
     }
 
-    public Author(String authorName, String phoneNumber, String email) {
-        this.authorName = authorName;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getEmail() {
@@ -63,6 +75,8 @@ public class Author {
                 "authorID='" + authorID + '\'' +
                 ", authorName='" + authorName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ public class CVSAuthorParserImpl implements AuthorParser {
     @Override
     public Author toAuthor(String line) {
         String [] parser = line.split(",");
-        Author author = new Author(parser[0], parser[1], parser[2], parser[3]);
+        Author author = new Author(parser[0], parser[1], parser[2], parser[3], Integer.parseInt(parser[4]));
         return author;
     }
 
@@ -30,7 +30,8 @@ public class CVSAuthorParserImpl implements AuthorParser {
         String line = (sb.append(author.getAuthorID()+delimeter+
                 author.getAuthorName()+delimeter+
                 author.getPhoneNumber()+delimeter+
-                author.getEmail()+"\n")).toString();
+                author.getEmail()+delimeter+
+                author.getAge()+"\n")).toString();
         return line;
     }
 
