@@ -17,7 +17,6 @@ import by.intexsoft.study.filters.Filter;
 import by.intexsoft.study.model.Author;
 import by.intexsoft.study.model.Book;
 import by.intexsoft.study.orders.Order;
-import by.intexsoft.study.orders.OrderTypes;
 import by.intexsoft.study.parser.AuthorParser;
 import by.intexsoft.study.parser.BookParser;
 import by.intexsoft.study.parser.impl.CSVBookParserImpl;
@@ -35,15 +34,13 @@ import by.intexsoft.study.storage.impl.JSONBookStorageWorkerImpl;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
 
+import static by.intexsoft.study.filters.Operator.BIGGERTHAN;
 import static by.intexsoft.study.filters.Operator.CONTAINS;
-import static by.intexsoft.study.filters.Operator.ENDSWITH;
+import static by.intexsoft.study.filters.Operator.EQUALS;
+import static by.intexsoft.study.filters.Operator.SMALLERTHAN;
 import static by.intexsoft.study.filters.Operator.STARTSWITH;
 import static by.intexsoft.study.orders.OrderTypes.ASC;
 import static by.intexsoft.study.orders.OrderTypes.DESC;
@@ -51,7 +48,7 @@ import static by.intexsoft.study.orders.OrderTypes.DESC;
 
 public class Starter {
 
-    public static void main (String [] args) throws IOException, ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static void main (String [] args) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         BookParser bookParser = new CSVBookParserImpl();
         CSVReader bookReader = new CSVReaderImpl("book.csv");
@@ -65,15 +62,15 @@ public class Starter {
         System.out.println("\n");
 
         List<Filter> bookFilters = new ArrayList<>();
-        bookFilters.add(new Filter("bookName", "Th", STARTSWITH));
-        bookFilters.add(new Filter("publicationDate", "20", CONTAINS));
+        bookFilters.add(new Filter<String>("bookName", "Th", STARTSWITH));
+        bookFilters.add(new Filter<String>("publicationDate", "20", CONTAINS));
 
         System.out.println("Filters");
         bookPrinter.printBooks(bookStorageWorker.getAllBooks(bookFilters));
         System.out.println("\n");
 
         List<Order> bookOrders = new ArrayList<>();
-        bookOrders.add(new Order("publicationDate", DESC));
+        bookOrders.add(new Order("authorID", DESC));
 
         System.out.println("Order");
         bookPrinter.printBooks(bookStorageWorker.orderAllBooks(bookOrders));
@@ -106,7 +103,6 @@ public class Starter {
         System.out.println(bookStorageWorker.findBookByAuthorId("5"));
         System.out.println("\n");
 
-
         AuthorParser authorParser = new CVSAuthorParserImpl();
         CSVReader authorReader = new CSVReaderImpl("author.csv");
         CSVWriter authorWriter = new CSVWriterImpl("author.csv");
@@ -119,23 +115,24 @@ public class Starter {
         System.out.println("\n");
 
         List<Filter> authorFilters = new ArrayList<>();
-        authorFilters.add(new Filter("authorName", "S", STARTSWITH));
-        authorFilters.add(new Filter("email", "@gmai", CONTAINS));
+        authorFilters.add(new Filter<Integer>("age", 30, BIGGERTHAN));
+        authorFilters.add(new Filter<Integer>("age", 61, SMALLERTHAN));
 
         System.out.println("Filters");
         authorPrinter.printAuthors(authorStorageWorker.getAllAuthor(authorFilters));
         System.out.println("\n");
 
         List<Order> authorOrders = new ArrayList<>();
-        authorOrders.add(new Order("authorName", DESC));
+        authorOrders.add(new Order("age", DESC));
 
         System.out.println("Order");
         authorPrinter.printAuthors(authorStorageWorker.orderAllAuthor(authorOrders));
         System.out.println("\n");
 
-        System.out.println("Filters and Order");
+        System.out.println("Filter and Order");
         authorPrinter.printAuthors(authorStorageWorker.getAllAuthor(authorFilters, authorOrders));
         System.out.println("\n");
+
 
         System.out.println("Add new author");
         authorStorageWorker.createAuthor(new Author("Name", "phone", "email", 20));
@@ -155,7 +152,6 @@ public class Starter {
         System.out.println("Find author by id 3");
         System.out.println(authorStorageWorker.findAuthorById("3"));
         System.out.println("\n");
-
 
         JSONBookReader jsonBookReader = new JSONBookReaderImpl("book.json");
         JSONBookWriter jsonBookWriter = new JSONBookWriterImpl("book.json");
@@ -209,8 +205,11 @@ public class Starter {
         authorPrinter.printAuthors(jsonAuthorStorageWorker.getAllAuthor());
         System.out.println("\n");
 
+        List<Filter> jsonAuthorFilters = new ArrayList<>();
+        jsonAuthorFilters.add(new Filter<Integer>("age", 33, EQUALS));
+
         System.out.println("Filters");
-        authorPrinter.printAuthors(jsonAuthorStorageWorker.getAllAuthor(authorFilters));
+        authorPrinter.printAuthors(jsonAuthorStorageWorker.getAllAuthor(jsonAuthorFilters));
         System.out.println("\n");
 
         authorOrders.add(new Order("authorID", ASC));
@@ -219,9 +218,10 @@ public class Starter {
         authorPrinter.printAuthors(jsonAuthorStorageWorker.orderAllAuthor(authorOrders));
         System.out.println("\n");
 
-        System.out.println("Filters and Order");
-        authorPrinter.printAuthors(jsonAuthorStorageWorker.getAllAuthor(authorFilters, authorOrders));
+        System.out.println("Filter and Order");
+        authorPrinter.printAuthors(jsonAuthorStorageWorker.getAllAuthor(jsonAuthorFilters, authorOrders));
         System.out.println("\n");
+
 
        System.out.println("Add new author");
         jsonAuthorStorageWorker.createAuthor(new Author("Name", "phone", "email", 20));

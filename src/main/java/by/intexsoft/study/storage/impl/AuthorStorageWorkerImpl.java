@@ -3,10 +3,13 @@ package by.intexsoft.study.storage.impl;
 import by.intexsoft.study.fileUtils.CSVReader;
 import by.intexsoft.study.fileUtils.CSVWriter;
 import by.intexsoft.study.filters.Filter;
-import by.intexsoft.study.filters.OperatorHelper;
+import by.intexsoft.study.filters.IOperatorHelper;
+import by.intexsoft.study.filters.OperatorHandler;
+import by.intexsoft.study.filters.OperatorManager;
 import by.intexsoft.study.model.Author;
+import by.intexsoft.study.orders.IOrderTypesHelper;
 import by.intexsoft.study.orders.Order;
-import by.intexsoft.study.orders.OrderTypesAuthorHelper;
+import by.intexsoft.study.orders.OrderManager;
 import by.intexsoft.study.parser.AuthorParser;
 import by.intexsoft.study.storage.AuthorStorageWorker;
 import by.intexsoft.study.stringUtils.StringUtils;
@@ -15,8 +18,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -106,6 +109,10 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
         List<Author> result = new ArrayList<>();
         List<String> list = reader.readCSV();
         List<Author>authorList = authorParser.toAuthors(list);
+
+        OperatorManager operatorManager = new OperatorManager();
+        operatorManager.getOperatorHelper(String.class);
+
         for(int i = 0; i < filters.size(); i++){
 
             Class<Author> authorClass = Author.class;
@@ -114,8 +121,10 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
             final int temp = i;
             Predicate<Author> authorPredicate = author -> {
                 try {
-                    String fieldValue = (String) authorGetter.invoke(author, new Object[0]);
-                    return OperatorHelper.getPredicate(filters.get(temp).getOperator()).handle(fieldValue,filters.get(temp).getValue());
+                    Object fieldValue = authorGetter.invoke(author, new Object[0]);
+                    IOperatorHelper<?> operatorHelper = operatorManager.getOperatorHelper(authorGetter.getReturnType());
+                    OperatorHandler operatorHandler = operatorHelper.getPredicate(filters.get(temp).getOperator());
+                    return  operatorHandler.handle(fieldValue, filters.get(temp).getValue());
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 } catch (InvocationTargetException e) {
@@ -131,10 +140,15 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
     }
 
     @Override
-    public List<Author> getAllAuthor(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException {
+    public List<Author> getAllAuthor(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         List<Author> result = new ArrayList<>();
         List<String> list = reader.readCSV();
         List<Author>authorList = authorParser.toAuthors(list);
+        OperatorManager operatorManager = new OperatorManager();
+        operatorManager.getOperatorHelper(String.class);
+
+        OrderManager orderManager = new OrderManager();
+        orderManager.getOrderHelper(String.class);
         for(int i = 0; i < filters.size(); i++){
 
             Class<Author> authorClass = Author.class;
@@ -143,8 +157,10 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
             final int temp = i;
             Predicate<Author> authorPredicate = author -> {
                 try {
-                    String fieldValue = (String) authorGetter.invoke(author, new Object[0]);
-                    return OperatorHelper.getPredicate(filters.get(temp).getOperator()).handle(fieldValue,filters.get(temp).getValue());
+                    Object fieldValue = authorGetter.invoke(author, new Object[0]);
+                    IOperatorHelper<?> operatorHelper = operatorManager.getOperatorHelper(authorGetter.getReturnType());
+                    OperatorHandler operatorHandler = operatorHelper.getPredicate(filters.get(temp).getOperator());
+                    return  operatorHandler.handle(fieldValue, filters.get(temp).getValue());
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 } catch (InvocationTargetException e) {
@@ -158,22 +174,16 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
 
         for(int j = 0; j < orders.size(); j++){
             Class<Author> authorClass = Author.class;
-            Method authorGetter = authorClass.getDeclaredMethod("get"+ StringUtils.firstUpperCase(filters.get(j).getField()));
+            Method authorGetter = authorClass.getDeclaredMethod("get"+ StringUtils.firstUpperCase(orders.get(j).getField()));
 
 
             final int tmp = j;
-            Function<Author, String> function = author -> {
-                try {
-                    return (String) authorGetter.invoke(author);
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                }
-            };
 
-            authorList = authorList.stream().sorted(OrderTypesAuthorHelper.getOrder(orders.get(tmp).getOrderTypes()).handle(function))
-                    .collect(Collectors.toList());
+            Class<IOrderTypesHelper> clazz = IOrderTypesHelper.class;
+            Method comparatorMethod = clazz.getDeclaredMethod(StringUtils.getComparatorMethodName(orders.get(tmp).getOrderTypes()), new Class[]{Class.class, String.class});
+            IOrderTypesHelper<?> orderTypesHelper = orderManager.getOrderHelper(authorGetter.getReturnType());
+            Comparator<Author> comparator = (Comparator<Author>) comparatorMethod.invoke(orderTypesHelper, Author.class, orders.get(tmp).getField());
+            authorList = authorList.stream().sorted(comparator).collect(Collectors.toList());
         }
 
         result.addAll(authorList);
@@ -181,10 +191,13 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
     }
 
     @Override
-    public List<Author> orderAllAuthor(List<Order> orders) throws IOException, NoSuchMethodException {
+    public List<Author> orderAllAuthor(List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         List<Author> result = new ArrayList<>();
         List<String> list = reader.readCSV();
         List<Author>authorList = authorParser.toAuthors(list);
+
+        OrderManager orderManager = new OrderManager();
+        orderManager.getOrderHelper(String.class);
         for(int i = 0; i < orders.size(); i++){
 
             Class<Author> authorClass = Author.class;
@@ -192,17 +205,11 @@ public class AuthorStorageWorkerImpl implements AuthorStorageWorker {
 
             final int temp = i;
 
-            Function<Author, String> function = author -> {
-                try {
-                    return (String) authorGetter.invoke(author);
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                }
-            };
-
-            authorList = authorList.stream().sorted(OrderTypesAuthorHelper.getOrder(orders.get(temp).getOrderTypes()).handle(function)).collect(Collectors.toList());
+            Class<IOrderTypesHelper> clazz = IOrderTypesHelper.class;
+            Method comparatorMethod = clazz.getDeclaredMethod(StringUtils.getComparatorMethodName(orders.get(temp).getOrderTypes()), new Class[]{Class.class, String.class});
+            IOrderTypesHelper<?> orderTypesHelper = orderManager.getOrderHelper(authorGetter.getReturnType());
+            Comparator<Author> comparator = (Comparator<Author>) comparatorMethod.invoke(orderTypesHelper, Author.class, orders.get(temp).getField());
+            authorList = authorList.stream().sorted(comparator).collect(Collectors.toList());
 
         }
         result.addAll(authorList);

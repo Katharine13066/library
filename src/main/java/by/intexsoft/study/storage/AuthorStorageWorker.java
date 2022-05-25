@@ -5,6 +5,7 @@ import by.intexsoft.study.model.Author;
 import by.intexsoft.study.orders.Order;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface AuthorStorageWorker {
@@ -14,6 +15,6 @@ public interface AuthorStorageWorker {
     Author findAuthorById(String id) throws IOException;
     List<Author> getAllAuthor() throws IOException;
     List<Author> getAllAuthor(List<Filter> filters) throws IOException, NoSuchMethodException;
-    List<Author> getAllAuthor(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException;
-    List<Author> orderAllAuthor(List<Order> orders) throws IOException, NoSuchMethodException;
+    List<Author> getAllAuthor(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
+    List<Author> orderAllAuthor(List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 }

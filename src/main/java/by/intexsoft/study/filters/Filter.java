@@ -1,24 +1,25 @@
 package by.intexsoft.study.filters;
 
-public class Filter {
+public class Filter<T> {
 
     private String field;
-    private String value;
+    private T value;
     private Operator operator;
 
     public  Filter(){}
 
-    public Filter(String field, String value, Operator operator) {
+
+    public Filter(String field, T value, Operator operator) {
         this.field = field;
         this.value = value;
         this.operator = operator;
     }
 
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(T value) {
         this.value = value;
     }
 

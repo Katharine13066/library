@@ -10,18 +10,18 @@ public class Author {
 
     String email;
 
-    int age;
+    Integer age;
 
     public Author(){}
 
-    public Author(String authorName, String phoneNumber, String email, int age) {
+    public Author(String authorName, String phoneNumber, String email, Integer age) {
         this.authorName = authorName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.age = age;
     }
 
-    public Author(String authorID, String authorName, String phoneNumber, String email, int age) {
+    public Author(String authorID, String authorName, String phoneNumber, String email, Integer age) {
         this.authorID = authorID;
         this.authorName = authorName;
         this.phoneNumber = phoneNumber;
@@ -29,11 +29,11 @@ public class Author {
         this.age = age;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
