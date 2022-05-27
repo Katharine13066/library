@@ -14,7 +14,7 @@ public interface AuthorStorageWorker {
     void deleteAuthorById(String id) throws IOException;
     Author findAuthorById(String id) throws IOException;
     List<Author> getAllAuthor() throws IOException;
-    List<Author> getAllAuthor(List<Filter> filters) throws IOException, NoSuchMethodException;
+    List<Author> getAllAuthor(List<Filter> filters) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
     List<Author> getAllAuthor(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
     List<Author> orderAllAuthor(List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 }

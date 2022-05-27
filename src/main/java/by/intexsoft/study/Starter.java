@@ -58,7 +58,7 @@ public class Starter {
         BookParser bookParser = new CSVBookParserImpl();
         CSVReader bookReader = new CSVReaderImpl("book.csv");
         CSVWriter bookWriter = new CSVWriterImpl("book.csv");
-        BookStorageWorker bookStorageWorker = new BookStorageWorkerImpl(bookReader, bookWriter, bookParser, operatorManager, orderManager);
+        BookStorageWorker bookStorageWorker = new BookStorageWorkerImpl(operatorManager, orderManager, bookReader, bookWriter, bookParser);
 
         BookPrinter bookPrinter = new BookPrinterImpl();
 
@@ -111,7 +111,7 @@ public class Starter {
         AuthorParser authorParser = new CVSAuthorParserImpl();
         CSVReader authorReader = new CSVReaderImpl("author.csv");
         CSVWriter authorWriter = new CSVWriterImpl("author.csv");
-        AuthorStorageWorker authorStorageWorker = new AuthorStorageWorkerImpl(authorReader, authorWriter, authorParser, operatorManager, orderManager);
+        AuthorStorageWorker authorStorageWorker = new AuthorStorageWorkerImpl(operatorManager, orderManager, authorReader, authorWriter, authorParser);
 
         AuthorPrinter authorPrinter = new AuthorPrinterImpl();
 
@@ -160,7 +160,7 @@ public class Starter {
 
         JSONBookReader jsonBookReader = new JSONBookReaderImpl("book.json");
         JSONBookWriter jsonBookWriter = new JSONBookWriterImpl("book.json");
-        BookStorageWorker jsonBookStorageWorker = new JSONBookStorageWorkerImpl(jsonBookReader, jsonBookWriter, operatorManager, orderManager);
+        BookStorageWorker jsonBookStorageWorker = new JSONBookStorageWorkerImpl(operatorManager, orderManager, jsonBookReader, jsonBookWriter);
 
         List<Book> bookList = jsonBookReader.readJSON();
 
@@ -204,7 +204,7 @@ public class Starter {
 
         JSONAuthorReader jsonAuthorReader = new JSONAuthorReaderImpl("author.json");
         JSONAuthorWriter jsonAuthorWriter = new JSONAuthorWriterImpl("author.json");
-        AuthorStorageWorker jsonAuthorStorageWorker = new JSONAuthorStorageWorkerImpl(jsonAuthorReader, jsonAuthorWriter, operatorManager, orderManager);
+        AuthorStorageWorker jsonAuthorStorageWorker = new JSONAuthorStorageWorkerImpl(operatorManager, orderManager, jsonAuthorReader, jsonAuthorWriter);
 
         System.out.println("Original author.json file");
         authorPrinter.printAuthors(jsonAuthorStorageWorker.getAllAuthor());
