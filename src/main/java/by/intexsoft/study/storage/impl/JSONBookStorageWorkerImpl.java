@@ -10,6 +10,7 @@ import by.intexsoft.study.model.Book;
 import by.intexsoft.study.orders.IOrderTypesHelper;
 import by.intexsoft.study.orders.Order;
 import by.intexsoft.study.orders.OrderManager;
+import by.intexsoft.study.orders.OrderTypes;
 import by.intexsoft.study.storage.BookStorageWorker;
 import by.intexsoft.study.stringUtils.StringUtils;
 
@@ -26,10 +27,22 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
 
     private JSONBookReader jsonBookReader;
     private JSONBookWriter jsonBookWriter;
+    private OperatorManager operatorManager;
+    private OrderManager orderManager;
 
     public JSONBookStorageWorkerImpl(JSONBookReader jsonBookReader, JSONBookWriter jsonBookWriter) {
         this.jsonBookReader = jsonBookReader;
         this.jsonBookWriter = jsonBookWriter;
+    }
+
+    public JSONBookStorageWorkerImpl(JSONBookReader jsonBookReader, JSONBookWriter jsonBookWriter, OperatorManager operatorManager, OrderManager orderManager) {
+        this.jsonBookReader = jsonBookReader;
+        this.jsonBookWriter = jsonBookWriter;
+        this.operatorManager = operatorManager;
+        this.orderManager = orderManager;
+        orderManager.getOrderHelper(String.class);
+        operatorManager.getOperatorHelper(String.class);
+
     }
 
     @Override
@@ -37,7 +50,7 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
         List<Book> library = jsonBookReader.readJSON();
         long num = System.currentTimeMillis();
         String id = String.valueOf(num);
-        book.setBookID(id.toString());
+        book.setBookID(id);
         library.add(book);
         jsonBookWriter.writeJSON(library);
         return book;
@@ -46,14 +59,7 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
     @Override
     public Book updateBook(Book book) throws IOException {
         List<Book> library = jsonBookReader.readJSON();
-        for(int i = 0; i < library.size(); i++){
-            if (library.get(i).getBookID().equals(book.getBookID())){
-                library.get(i).setBookName(book.getBookName());
-                library.get(i).setAuthorID(book.getAuthorID());
-                library.get(i).setPublisher(book.getPublisher());
-                library.get(i).setPublicationDate(book.getPublicationDate());
-            }
-        }
+        updateBookById(library, book);
         jsonBookWriter.writeJSON(library);
         return book;
     }
@@ -73,13 +79,13 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
     public Book findBookById(String id) throws IOException {
         List<Book> library = jsonBookReader.readJSON();
         Book book = new Book();
-        for (int i = 0; i < library.size(); i++){
-            if (library.get(i).getBookID().equals(id)){
-                book.setBookID(library.get(i).getBookID());
-                book.setBookName(library.get(i).getBookName());
-                book.setAuthorID(library.get(i).getAuthorID());
-                book.setPublisher(library.get(i).getPublisher());
-                book.setPublicationDate(library.get(i).getPublicationDate());
+        for (Book bookIterator: library){
+            if (bookIterator.getBookID().equals(id)){
+                book.setBookID(bookIterator.getBookID());
+                book.setBookName(bookIterator.getBookName());
+                book.setAuthorID(bookIterator.getAuthorID());
+                book.setPublisher(bookIterator.getPublisher());
+                book.setPublicationDate(bookIterator.getPublicationDate());
             }
         }
         return book;
@@ -89,13 +95,13 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
     public Book findBookByAuthorId(String id) throws IOException {
         List<Book> library = jsonBookReader.readJSON();
         Book book = new Book();
-        for (int i = 0; i < library.size(); i++){
-            if (library.get(i).getAuthorID().equals(id)){
-                book.setBookID(library.get(i).getBookID());
-                book.setBookName(library.get(i).getBookName());
-                book.setAuthorID(library.get(i).getAuthorID());
-                book.setPublisher(library.get(i).getPublisher());
-                book.setPublicationDate(library.get(i).getPublicationDate());
+        for (Book bookIterator: library){
+            if (bookIterator.getAuthorID().equals(id)){
+                book.setBookID(bookIterator.getBookID());
+                book.setBookName(bookIterator.getBookName());
+                book.setAuthorID(bookIterator.getAuthorID());
+                book.setPublisher(bookIterator.getPublisher());
+                book.setPublicationDate(bookIterator.getPublicationDate());
             }
         }
         return book;
@@ -108,103 +114,95 @@ public class JSONBookStorageWorkerImpl implements BookStorageWorker {
 
     @Override
     public List<Book> getAllBooks(List<Filter> filters) throws IOException, NoSuchMethodException {
-        List<Book> result = new ArrayList<>();
         List<Book> library = jsonBookReader.readJSON();
-        OperatorManager operatorManager = new OperatorManager();
-        operatorManager.getOperatorHelper(String.class);
+
         for(int i = 0; i < filters.size(); i++){
-
-            Class<Book> bookClass = Book.class;
-            Method bookGetter = bookClass.getDeclaredMethod("get"+ StringUtils.firstUpperCase(filters.get(i).getField()));
-
+            Method bookGetter = getBookGetter(filters.get(i).getField());
             final int temp = i;
-            Predicate<Book> bookPredicate = book -> {
-                try {
-                    String fieldValue = (String) bookGetter.invoke(book, new Object[0]);
-                    IOperatorHelper<?> operatorHelper = operatorManager.getOperatorHelper(bookGetter.getReturnType());
-                    OperatorHandler operatorHandler = operatorHelper.getPredicate(filters.get(temp).getOperator());
-                    return  operatorHandler.handle(fieldValue, filters.get(temp).getValue());
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                }
-            };
-
-            library = library.stream().filter(bookPredicate).collect(Collectors.toList());
+            library = library.stream().filter(getBookPredicate(bookGetter, temp, filters)).collect(Collectors.toList());
 
         }
-        result.addAll(library);
-        return result;
+        return getBookResult(library);
     }
 
     @Override
     public List<Book> getAllBooks(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        List<Book> result = new ArrayList<>();
         List<Book> library = jsonBookReader.readJSON();
-        OperatorManager operatorManager = new OperatorManager();
-        operatorManager.getOperatorHelper(String.class);
-        OrderManager orderManager = new OrderManager();
-        orderManager.getOrderHelper(String.class);
+
         for(int i = 0; i < filters.size(); i++){
-
-            Class<Book> bookClass = Book.class;
-            Method bookGetter = bookClass.getDeclaredMethod("get"+ StringUtils.firstUpperCase(filters.get(i).getField()));
-
+            Method bookGetter = getBookGetter(filters.get(i).getField());
             final int temp = i;
-            Predicate<Book> bookPredicate = book -> {
-                try {
-                    String fieldValue = (String) bookGetter.invoke(book, new Object[0]);
-                    IOperatorHelper<?> operatorHelper = operatorManager.getOperatorHelper(bookGetter.getReturnType());
-                    OperatorHandler operatorHandler = operatorHelper.getPredicate(filters.get(temp).getOperator());
-                    return  operatorHandler.handle(fieldValue, filters.get(temp).getValue());
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                }
-            };
-
-            library = library.stream().filter(bookPredicate).collect(Collectors.toList());
+            library = library.stream().filter(getBookPredicate(bookGetter, temp, filters)).collect(Collectors.toList());
         }
 
         for(int j = 0; j < orders.size(); j++){
-            Class<Book> bookClass = Book.class;
-            Method bookGetter = bookClass.getDeclaredMethod("get"+ StringUtils.firstUpperCase(orders.get(j).getField()));
-
+            Method bookGetter = getBookGetter(orders.get(j).getField());
             final int tmp = j;
-
-            Class<IOrderTypesHelper> clazz = IOrderTypesHelper.class;
-            Method comparatorMethod = clazz.getDeclaredMethod(StringUtils.getComparatorMethodName(orders.get(tmp).getOrderTypes()), new Class[]{Class.class, String.class});
-            IOrderTypesHelper<?> orderTypesHelper = orderManager.getOrderHelper(bookGetter.getReturnType());
-            Comparator<Book> comparator = (Comparator<Book>) comparatorMethod.invoke(orderTypesHelper, Book.class, orders.get(tmp).getField());
-            library = library.stream().sorted(comparator).collect(Collectors.toList());
+            library = library.stream().sorted(getBookComporator(bookGetter, tmp, orders)).collect(Collectors.toList());
         }
 
-        result.addAll(library);
-        return result;
+        return getBookResult(library);
     }
 
     @Override
     public List<Book> orderAllBooks(List<Order> orders) throws NoSuchMethodException, IOException, InvocationTargetException, IllegalAccessException {
-        List<Book> result = new ArrayList<>();
         List<Book> library = jsonBookReader.readJSON();
-        OrderManager orderManager = new OrderManager();
-        orderManager.getOrderHelper(String.class);
         for(int i = 0; i < orders.size(); i++){
-
-            Class<Book> bookClass = Book.class;
-            Method bookGetter = bookClass.getDeclaredMethod("get"+ StringUtils.firstUpperCase(orders.get(i).getField()));
-
+            Method bookGetter = getBookGetter(orders.get(i).getField());
             final int temp = i;
-
-            Class<IOrderTypesHelper> clazz = IOrderTypesHelper.class;
-            Method comparatorMethod = clazz.getDeclaredMethod(StringUtils.getComparatorMethodName(orders.get(i).getOrderTypes()), new Class[]{Class.class, String.class});
-            IOrderTypesHelper<?> orderTypesHelper = orderManager.getOrderHelper(bookGetter.getReturnType());
-            Comparator<Book> comparator = (Comparator<Book>) comparatorMethod.invoke(orderTypesHelper, Book.class, orders.get(i).getField());
-            library = library.stream().sorted(comparator).collect(Collectors.toList());
+            library = library.stream().sorted(getBookComporator(bookGetter,temp, orders)).collect(Collectors.toList());
         }
+        return getBookResult(library);
+    }
+
+    private List<Book> getBookResult(List<Book> library){
+        List<Book> result = new ArrayList<>();
         result.addAll(library);
         return result;
+    }
+
+    private void updateBookById(List<Book> library, Book book){
+        for(Book bookIterator: library){
+            if (bookIterator.getBookID().equals(book.getBookID())){
+                bookIterator.setBookName(book.getBookName());
+                bookIterator.setAuthorID(book.getAuthorID());
+                bookIterator.setPublisher(book.getPublisher());
+                bookIterator.setPublicationDate(book.getPublicationDate());
+            }
+        }
+    }
+
+    private Method getBookGetter(String field) throws NoSuchMethodException {
+        Class<Book> bookClass = Book.class;
+        return bookClass.getDeclaredMethod("get"+ StringUtils.firstUpperCase(field));
+    }
+
+    private Predicate<Book> getBookPredicate(Method bookGetter, final int temp, List<Filter> filters){
+        Predicate<Book> bookPredicate = book -> {
+            try {
+                String fieldValue = (String) bookGetter.invoke(book, new Object[0]);
+                IOperatorHelper<?> operatorHelper = operatorManager.getOperatorHelper(bookGetter.getReturnType());
+                OperatorHandler operatorHandler = operatorHelper.getPredicate(filters.get(temp).getOperator());
+                return  operatorHandler.handle(fieldValue, filters.get(temp).getValue());
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        };
+        return bookPredicate;
+    }
+
+    private Method getComporatorMethod(OrderTypes field) throws NoSuchMethodException {
+        Class<IOrderTypesHelper> clazz = IOrderTypesHelper.class;
+        Method comparatorMethod = clazz.getDeclaredMethod(StringUtils.getComparatorMethodName(field), new Class[]{Class.class, String.class});
+        return comparatorMethod;
+    }
+
+    private Comparator<Book> getBookComporator(Method bookGetter, final int tmp, List<Order> orders) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method comparatorMethod = getComporatorMethod(orders.get(tmp).getOrderTypes());
+        IOrderTypesHelper<?> orderTypesHelper = orderManager.getOrderHelper(bookGetter.getReturnType());
+        Comparator<Book> comparator = (Comparator<Book>) comparatorMethod.invoke(orderTypesHelper, Book.class, orders.get(tmp).getField());
+        return comparator;
     }
 }

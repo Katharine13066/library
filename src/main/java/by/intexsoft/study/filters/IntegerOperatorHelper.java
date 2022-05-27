@@ -13,15 +13,15 @@ public class IntegerOperatorHelper implements IOperatorHelper<Integer>{
         integerOperatorMap.put(Operator.EQUALS, IntegerOperatorHelper::equalInteger);
     }
 
-    public static Boolean equalInteger(Integer i1, Integer i2){
+    private static Boolean equalInteger(Integer i1, Integer i2){
         return i1.equals(i2);
     }
 
-    public static Boolean smallerThan(Integer i1, Integer i2) {
+    private static Boolean smallerThan(Integer i1, Integer i2) {
         return i1 <= i2;
     }
 
-    public static Boolean biggerThan(Integer i1, Integer i2) {
+    private static Boolean biggerThan(Integer i1, Integer i2) {
         return i1 >= i2;
     }
     @Override

@@ -14,9 +14,11 @@ import by.intexsoft.study.fileUtils.impl.JSONAuthorWriterImpl;
 import by.intexsoft.study.fileUtils.impl.JSONBookReaderImpl;
 import by.intexsoft.study.fileUtils.impl.JSONBookWriterImpl;
 import by.intexsoft.study.filters.Filter;
+import by.intexsoft.study.filters.OperatorManager;
 import by.intexsoft.study.model.Author;
 import by.intexsoft.study.model.Book;
 import by.intexsoft.study.orders.Order;
+import by.intexsoft.study.orders.OrderManager;
 import by.intexsoft.study.parser.AuthorParser;
 import by.intexsoft.study.parser.BookParser;
 import by.intexsoft.study.parser.impl.CSVBookParserImpl;
@@ -50,10 +52,13 @@ public class Starter {
 
     public static void main (String [] args) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
+        OperatorManager operatorManager = new OperatorManager();
+        OrderManager orderManager = new OrderManager();
+
         BookParser bookParser = new CSVBookParserImpl();
         CSVReader bookReader = new CSVReaderImpl("book.csv");
         CSVWriter bookWriter = new CSVWriterImpl("book.csv");
-        BookStorageWorker bookStorageWorker = new BookStorageWorkerImpl(bookReader, bookWriter, bookParser);
+        BookStorageWorker bookStorageWorker = new BookStorageWorkerImpl(bookReader, bookWriter, bookParser, operatorManager, orderManager);
 
         BookPrinter bookPrinter = new BookPrinterImpl();
 
@@ -106,7 +111,7 @@ public class Starter {
         AuthorParser authorParser = new CVSAuthorParserImpl();
         CSVReader authorReader = new CSVReaderImpl("author.csv");
         CSVWriter authorWriter = new CSVWriterImpl("author.csv");
-        AuthorStorageWorker authorStorageWorker = new AuthorStorageWorkerImpl(authorReader, authorWriter, authorParser);
+        AuthorStorageWorker authorStorageWorker = new AuthorStorageWorkerImpl(authorReader, authorWriter, authorParser, operatorManager, orderManager);
 
         AuthorPrinter authorPrinter = new AuthorPrinterImpl();
 
@@ -155,7 +160,7 @@ public class Starter {
 
         JSONBookReader jsonBookReader = new JSONBookReaderImpl("book.json");
         JSONBookWriter jsonBookWriter = new JSONBookWriterImpl("book.json");
-        BookStorageWorker jsonBookStorageWorker = new JSONBookStorageWorkerImpl(jsonBookReader, jsonBookWriter);
+        BookStorageWorker jsonBookStorageWorker = new JSONBookStorageWorkerImpl(jsonBookReader, jsonBookWriter, operatorManager, orderManager);
 
         List<Book> bookList = jsonBookReader.readJSON();
 
@@ -199,7 +204,7 @@ public class Starter {
 
         JSONAuthorReader jsonAuthorReader = new JSONAuthorReaderImpl("author.json");
         JSONAuthorWriter jsonAuthorWriter = new JSONAuthorWriterImpl("author.json");
-        AuthorStorageWorker jsonAuthorStorageWorker = new JSONAuthorStorageWorkerImpl(jsonAuthorReader, jsonAuthorWriter);
+        AuthorStorageWorker jsonAuthorStorageWorker = new JSONAuthorStorageWorkerImpl(jsonAuthorReader, jsonAuthorWriter, operatorManager, orderManager);
 
         System.out.println("Original author.json file");
         authorPrinter.printAuthors(jsonAuthorStorageWorker.getAllAuthor());

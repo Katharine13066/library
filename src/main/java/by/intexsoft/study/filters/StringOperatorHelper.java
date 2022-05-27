@@ -13,13 +13,13 @@ public class StringOperatorHelper implements IOperatorHelper<String> {
         stringOperatorMap.put(Operator.CONTAINS, StringOperatorHelper::contains);
     }
 
-    public static Boolean startsWith(String source, String target) {
+    private static Boolean startsWith(String source, String target) {
         return  source.startsWith(target);
     }
 
-    public static Boolean endWith(String source, String target) { return  source.endsWith(target);}
+    private static Boolean endWith(String source, String target) { return  source.endsWith(target);}
 
-    public static Boolean contains(String source, String target) { return source.contains(target);}
+    private static Boolean contains(String source, String target) { return source.contains(target);}
 
     @Override
     public OperatorHandler<String> getPredicate(Operator operator) {
