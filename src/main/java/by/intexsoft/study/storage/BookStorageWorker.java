@@ -1,8 +1,11 @@
 package by.intexsoft.study.storage;
 
+import by.intexsoft.study.filters.Filter;
 import by.intexsoft.study.model.Book;
+import by.intexsoft.study.orders.Order;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface BookStorageWorker {
@@ -12,4 +15,8 @@ public interface BookStorageWorker {
     Book findBookById(String id) throws IOException;
     Book findBookByAuthorId(String id) throws IOException;
     List<Book> getAllBooks() throws IOException;
+    List<Book> getAllBooks(List<Filter> filters) throws IOException, NoSuchMethodException;
+    List<Book> getAllBooks(List<Filter> filters, List<Order> orders) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
+    List<Book> orderAllBooks(List<Order> orders) throws NoSuchMethodException, IOException, InvocationTargetException, IllegalAccessException;
+
 }
