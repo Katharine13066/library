@@ -7,16 +7,19 @@ import by.intexsoft.study.convert.impl.BookConverterImpl;
 import by.intexsoft.study.fileUtils.JSONAuthorReader;
 import by.intexsoft.study.model.Author;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+@Component
 public class JSONAuthorReaderImpl implements JSONAuthorReader {
 
     private String filename;
 
-    public JSONAuthorReaderImpl(String filename){
+    public JSONAuthorReaderImpl(@Value("${authorJsonFilename}")String filename){
         this.filename = filename;
     }
 

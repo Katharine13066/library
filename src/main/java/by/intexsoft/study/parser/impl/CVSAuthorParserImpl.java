@@ -2,10 +2,12 @@ package by.intexsoft.study.parser.impl;
 
 import by.intexsoft.study.model.Author;
 import by.intexsoft.study.parser.AuthorParser;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CVSAuthorParserImpl implements AuthorParser {
     @Override
     public Author toAuthor(String line) {

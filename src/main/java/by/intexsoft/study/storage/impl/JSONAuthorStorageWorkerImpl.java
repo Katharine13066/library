@@ -8,16 +8,21 @@ import by.intexsoft.study.model.Author;
 import by.intexsoft.study.orders.Order;
 import by.intexsoft.study.orders.OrderManager;
 import by.intexsoft.study.storage.AbstractAuthorStorageWorker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+@Component("jsonAuthorStorageWorkerImpl")
 public class JSONAuthorStorageWorkerImpl extends AbstractAuthorStorageWorker {
 
     private JSONAuthorReader jsonAuthorReader;
     private JSONAuthorWriter jsonAuthorWriter;
 
+    @Autowired
     public JSONAuthorStorageWorkerImpl(OperatorManager operatorManager, OrderManager orderManager, JSONAuthorReader jsonAuthorReader, JSONAuthorWriter jsonAuthorWriter) {
         super(operatorManager, orderManager);
         this.jsonAuthorReader = jsonAuthorReader;
