@@ -3,33 +3,28 @@ package by.intexsoft.study.storage.impl;
 import by.intexsoft.study.fileUtils.CSVReader;
 import by.intexsoft.study.fileUtils.CSVWriter;
 import by.intexsoft.study.filters.Filter;
-import by.intexsoft.study.filters.IOperatorHelper;
-import by.intexsoft.study.filters.OperatorHandler;
 import by.intexsoft.study.filters.OperatorManager;
 import by.intexsoft.study.model.Book;
-import by.intexsoft.study.orders.IOrderTypesHelper;
 import by.intexsoft.study.orders.Order;
 import by.intexsoft.study.orders.OrderManager;
-import by.intexsoft.study.orders.OrderTypes;
 import by.intexsoft.study.parser.BookParser;
 import by.intexsoft.study.storage.AbstractBookStorageWorker;
-import by.intexsoft.study.storage.BookStorageWorker;
-import by.intexsoft.study.stringUtils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
+@Component
+@Primary
 public class BookStorageWorkerImpl  extends AbstractBookStorageWorker {
     private CSVReader reader;
     private CSVWriter writer;
     private BookParser bookParser;
 
+    @Autowired
     public BookStorageWorkerImpl(OperatorManager operatorManager, OrderManager orderManager, CSVReader reader, CSVWriter writer, BookParser bookParser) {
         super(operatorManager, orderManager);
         this.reader = reader;

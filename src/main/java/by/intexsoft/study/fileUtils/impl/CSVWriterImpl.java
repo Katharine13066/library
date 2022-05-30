@@ -1,7 +1,6 @@
 package by.intexsoft.study.fileUtils.impl;
 
 import by.intexsoft.study.fileUtils.CSVWriter;
-import by.intexsoft.study.model.Book;
 
 import java.io.*;
 import java.util.List;

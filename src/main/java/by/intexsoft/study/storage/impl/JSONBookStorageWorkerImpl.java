@@ -8,16 +8,20 @@ import by.intexsoft.study.model.Book;
 import by.intexsoft.study.orders.Order;
 import by.intexsoft.study.orders.OrderManager;
 import by.intexsoft.study.storage.AbstractBookStorageWorker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+@Component
 public class JSONBookStorageWorkerImpl extends AbstractBookStorageWorker {
 
     private JSONBookReader jsonBookReader;
     private JSONBookWriter jsonBookWriter;
 
+    @Autowired
     public JSONBookStorageWorkerImpl(OperatorManager operatorManager, OrderManager orderManager, JSONBookReader jsonBookReader, JSONBookWriter jsonBookWriter) {
         super(operatorManager, orderManager);
         this.jsonBookReader = jsonBookReader;

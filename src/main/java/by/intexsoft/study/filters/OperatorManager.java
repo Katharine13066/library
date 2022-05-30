@@ -1,8 +1,11 @@
 package by.intexsoft.study.filters;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class OperatorManager{
 
      private Map<Class<?>,IOperatorHelper> map = new HashMap<>();

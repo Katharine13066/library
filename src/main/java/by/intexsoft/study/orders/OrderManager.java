@@ -1,8 +1,11 @@
 package by.intexsoft.study.orders;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class OrderManager {
 
     private Map<Class<?>, IOrderTypesHelper> map = new HashMap<>();

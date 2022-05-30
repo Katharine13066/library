@@ -2,10 +2,12 @@ package by.intexsoft.study.parser.impl;
 
 import by.intexsoft.study.model.Book;
 import by.intexsoft.study.parser.BookParser;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CSVBookParserImpl implements BookParser {
     @Override
     public Book toBook(String line) {
