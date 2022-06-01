@@ -9,22 +9,17 @@ import by.intexsoft.study.orders.Order;
 import by.intexsoft.study.orders.OrderManager;
 import by.intexsoft.study.parser.AuthorParser;
 import by.intexsoft.study.storage.AbstractAuthorStorageWorker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-@Component
 public class AuthorStorageWorkerImpl extends AbstractAuthorStorageWorker {
 
     private CSVReader reader;
     private CSVWriter writer;
     private AuthorParser authorParser;
 
-    @Autowired
     public AuthorStorageWorkerImpl(OperatorManager operatorManager, OrderManager orderManager, CSVReader reader, CSVWriter writer, AuthorParser authorParser) {
         super(operatorManager, orderManager);
         this.reader = reader;

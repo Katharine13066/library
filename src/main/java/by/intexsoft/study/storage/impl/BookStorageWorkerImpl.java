@@ -9,22 +9,16 @@ import by.intexsoft.study.orders.Order;
 import by.intexsoft.study.orders.OrderManager;
 import by.intexsoft.study.parser.BookParser;
 import by.intexsoft.study.storage.AbstractBookStorageWorker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-@Component
-@Primary
 public class BookStorageWorkerImpl  extends AbstractBookStorageWorker {
     private CSVReader reader;
     private CSVWriter writer;
     private BookParser bookParser;
 
-    @Autowired
     public BookStorageWorkerImpl(OperatorManager operatorManager, OrderManager orderManager, CSVReader reader, CSVWriter writer, BookParser bookParser) {
         super(operatorManager, orderManager);
         this.reader = reader;
