@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-bookHistory
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: bookHistory
+            columns:
+              - column:
+                  name: bookHistoryID
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bookID
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bk_books
+                    references: books(bookID)
+              - column:
+                  name: userID
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bk_users
+                    references: users(userID)
+              - column:
+                  name: startDate
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: returnDate
+                  type: date
+                  constraints:
+                    nullable: false

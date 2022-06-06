@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-feedback
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: feedback
+            columns:
+              - column:
+                  name: feedBackID
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: userID
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_fd_users
+                    references: users(userID)
+              - column:
+                  name: bookID
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_fb_books
+                    references: books(bookID)
+              - column:
+                  name: comments
+                  type: varchar(200)
+                  constraints:
+                    nullable: false

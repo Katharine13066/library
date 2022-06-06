@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-book
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  name: bookID
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bookName
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authorID
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bk_authors
+                    references: authors(authorID)
+              - column:
+                  name: publisher
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: publicationDate
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: boolean
+                  constraints:
+                    nullable: false

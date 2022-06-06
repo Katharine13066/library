@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-user
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: userID
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: userName
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phoneNumber
+                  type: varchar(200)
+                  constraints:
+                    unique: true
+              - column:
+                  name: email
+                  type: varchar(200)
+                  constraints:
+                    unique: true
+              - column:
+                  name: birthday
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: passwordHash
+                  type: bigint
+                  constraints:
+                    unique: true
+                    nullable: false
