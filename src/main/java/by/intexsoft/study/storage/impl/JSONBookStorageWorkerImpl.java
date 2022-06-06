@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-@Component
+@Component("jsonBookStorageWorkerImpl")
 public class JSONBookStorageWorkerImpl extends AbstractBookStorageWorker {
 
     private JSONBookReader jsonBookReader;
