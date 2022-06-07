@@ -1,0 +1,18 @@
+databaseChangeLog:
+  changeSet:
+    id: createBookHistoryTrigger
+    author: Ekaterina Gorshunova
+    changes:
+      - createTrigger:
+          comments: A String
+          dbms: postgres
+          disabled: true
+          encoding: UTF-8
+          path: sql/bookhistory-trigger.sql
+          relativeToChangelogFile: true
+          replaceIfExists: false
+          schemaName: public
+          scope: A String
+          tableName: bookHistory
+          triggerBody: A String
+          triggerName: A String

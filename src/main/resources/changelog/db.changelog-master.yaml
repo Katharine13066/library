@@ -12,5 +12,5 @@ databaseChangeLog:
       file: v1.0/create-bookhistory.yaml
       relativeToChangelogFile: true
   - include:
-      file: v1.0/create-feedback.yaml
+      file: v2.0/create-bookhistory-trigger.yaml
       relativeToChangelogFile: true
