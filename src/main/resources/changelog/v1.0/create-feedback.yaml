@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: feedback
             columns:
               - column:
-                  name: feedBackID
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
@@ -26,8 +26,6 @@ databaseChangeLog:
               - column:
                   name: comments
                   type: varchar(200)
-                  constraints:
-                    nullable: false
   - changeSet:
       id: addForeignKeyForBookID
       author: Ekaterina Gorshunova
@@ -37,7 +35,7 @@ databaseChangeLog:
             baseColumnNames: bookID
             baseTableSchemaName:  public
             referencedTableName: books
-            referencedColumnNames: bookID
+            referencedColumnNames: id
             constraintName: bookID-constraint
             referencedTableSchemaName: public
             validate: true
@@ -50,7 +48,7 @@ databaseChangeLog:
             baseColumnNames: userID
             baseTableSchemaName: public
             referencedTableName: users
-            referencedColumnNames: userID
+            referencedColumnNames: id
             constraintName: userID-constraint
             referencedTableSchemaName: public
             validate: true

@@ -36,7 +36,7 @@ databaseChangeLog:
             baseColumnNames: bookID
             baseTableSchemaName: public
             referencedTableName: books
-            referencedColumnNames: bookID
+            referencedColumnNames: id
             constraintName: bookID-pk-fk-constraint
             referencedTableSchemaName: public
             validate: true
@@ -49,7 +49,7 @@ databaseChangeLog:
             baseColumnNames: authorID
             baseTableSchemaName: public
             referencedTableName: authors
-            referencedColumnNames: authorID
+            referencedColumnNames: id
             constraintName: authorID-pk-fk-constraint
             referencedTableSchemaName: public
             validate: true
