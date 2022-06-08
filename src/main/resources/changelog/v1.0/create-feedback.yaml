@@ -18,17 +18,39 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_fd_users
-                    references: users(userID)
               - column:
                   name: bookID
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_fb_books
-                    references: books(bookID)
               - column:
                   name: comments
                   type: varchar(200)
                   constraints:
                     nullable: false
+  - changeSet:
+      id: addForeignKeyForBookID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: bookID
+            baseTableSchemaName:  public
+            referencedTableName: books
+            referencedColumnNames: bookID
+            constraintName: bookID-constraint
+            referencedTableSchemaName: public
+            validate: true
+  - changeSet:
+      id: addForeignKeyForUserID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: userID
+            baseTableSchemaName: public
+            referencedTableName: users
+            referencedColumnNames: userID
+            constraintName: userID-constraint
+            referencedTableSchemaName: public
+            validate: true

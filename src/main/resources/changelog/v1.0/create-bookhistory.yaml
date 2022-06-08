@@ -18,15 +18,11 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_bk_books
-                    references: books(bookID)
               - column:
                   name: userID
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_bk_users
-                    references: users(userID)
               - column:
                   name: startDate
                   type: date
@@ -37,3 +33,29 @@ databaseChangeLog:
                   type: date
                   constraints:
                     nullable: false
+  - changeSet:
+      id: addForeignKeyForBookID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: bookHistory
+            baseColumnNames: bookID
+            baseTableSchemaName: public
+            referencedTableName: books
+            referencedColumnNames: bookID
+            constraintName: bookID-constraint-bh
+            referencedTableSchemaName: public
+            validate: true
+  - changeSet:
+      id: addForeignKeyForUserID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: bookHistory
+            baseColumnNames: userID
+            baseTableSchemaName: public
+            referencedTableName: users
+            referencedColumnNames: userID
+            constraintName: userID-constraint-bh
+            referencedTableSchemaName: public
+            validate: true

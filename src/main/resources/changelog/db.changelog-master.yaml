@@ -1,16 +1,19 @@
 databaseChangeLog:
   - include:
-      file: v1.0/create-authors.yaml
+      file: v1.0/create-users.yaml
       relativeToChangelogFile: true
   - include:
-      file: v1.0/create-users.yaml
+      file: v1.0/create-authors.yaml
       relativeToChangelogFile: true
   - include:
       file: v1.0/create-books.yaml
       relativeToChangelogFile: true
   - include:
+      file: v1.0/create-feedback.yaml
+      relativeToChangelogFile: true
+  - include:
       file: v1.0/create-bookhistory.yaml
       relativeToChangelogFile: true
   - include:
-      file: v2.0/create-bookhistory-trigger.yaml
+      file: v1.0/create-books-authors.yaml
       relativeToChangelogFile: true

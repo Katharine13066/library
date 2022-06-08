@@ -21,7 +21,7 @@ import org.springframework.core.env.Environment;
 
 @Configuration
 @ComponentScan(basePackages = "by.intexsoft.study")
-@PropertySource(value = "classpath:application.properties")
+@PropertySource(value = "classpath:storage.properties")
 public class AppConfig {
 
    @Autowired
