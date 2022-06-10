@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-book-author
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: bookAuthor
+            columns:
+              - column:
+                  name: bookID
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authorID
+                  type: bigint
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: add-composite-primary-key
+      author: Ekaterina Gorshunova
+      changes:
+        - addPrimaryKey:
+            clustered: true
+            columnNames: bookID, authorID
+            constraintName: book_author_pk
+            schemaName: public
+            tableName: bookAuthor
+            validate: true
+  - changeSet:
+      id: addForeignKeyForBookAuthor1
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: bookAuthor
+            baseColumnNames: bookID
+            baseTableSchemaName: public
+            referencedTableName: books
+            referencedColumnNames: id
+            constraintName: bookID-pk-fk-constraint
+            referencedTableSchemaName: public
+            validate: true
+  - changeSet:
+      id: addForeignKeyForBookAuthor2
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: bookAuthor
+            baseColumnNames: authorID
+            baseTableSchemaName: public
+            referencedTableName: authors
+            referencedColumnNames: id
+            constraintName: authorID-pk-fk-constraint
+            referencedTableSchemaName: public
+            validate: true

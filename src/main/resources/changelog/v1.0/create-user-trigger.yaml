@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-trigger-bh
+      author: Ekaterina Gorshunova
+      changes:
+        - sql:
+            dbms: 'postgresql'
+            splitStatements: false
+            sql: CREATE FUNCTION user_passoword_check() RETURNS TRIGGER AS $$ BEGIN IF length(NEW."passwordHash") < 8 OR NEW."passwordHash" IS NULL THEN RAISE EXCEPTION 'The username cannot be less than 8 characters'; END IF; IF NEW."passwordHash" IS NULL THEN RAISE EXCEPTION 'Username cannot be NULL';  END IF; RETURN NEW; END; $$ LANGUAGE plpgsql; CREATE TRIGGER user_trigger BEFORE INSERT OR UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE user_passoword_check();

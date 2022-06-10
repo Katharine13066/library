@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-feedback
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: feedback
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: userID
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bookID
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comments
+                  type: varchar(200)
+  - changeSet:
+      id: addForeignKeyForBookID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: bookID
+            baseTableSchemaName:  public
+            referencedTableName: books
+            referencedColumnNames: id
+            constraintName: bookID-constraint
+            referencedTableSchemaName: public
+            validate: true
+  - changeSet:
+      id: addForeignKeyForUserID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: feedback
+            baseColumnNames: userID
+            baseTableSchemaName: public
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: userID-constraint
+            referencedTableSchemaName: public
+            validate: true

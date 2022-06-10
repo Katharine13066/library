@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - include:
+      file: v1.0/create-users.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/create-authors.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/create-books.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/create-feedback.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/create-bookhistory.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/create-books-authors.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/create-feedback-trigger.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/create-user-trigger.yaml
+      relativeToChangelogFile: true

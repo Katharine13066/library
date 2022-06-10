@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-trigger-fb
+      author: Ekaterina Gorshunova
+      changes:
+        - sql:
+            dbms: 'postgresql'
+            splitStatements: false
+            sql: CREATE OR REPLACE FUNCTION bhfunc() RETURNS TRIGGER AS $my_table$ BEGIN INSERT INTO "bookHistory"("bookID","userID") VALUES (new."bookID", new."userID"); RETURN NEW; END; $my_table$ LANGUAGE plpgsql; CREATE TRIGGER feedback_trigger AFTER INSERT ON feedback FOR EACH ROW EXECUTE PROCEDURE bhfunc();

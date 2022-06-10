@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-author
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: authorName
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phoneNumber
+                  type: varchar(200)
+                  constraints:
+                    unique: true
+              - column:
+                  name: email
+                  type: varchar(200)
+                  constraints:
+                    unique: true
+              - column:
+                  name: age
+                  type: int

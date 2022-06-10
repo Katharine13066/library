@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-bookHistory
+      author: Ekaterina Gorshunova
+      changes:
+        - createTable:
+            tableName: bookHistory
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: bookID
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: userID
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: startDate
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: returnDate
+                  type: date
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: addForeignKeyForBookID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: bookHistory
+            baseColumnNames: bookID
+            baseTableSchemaName: public
+            referencedTableName: books
+            referencedColumnNames: id
+            constraintName: bookID-constraint-bh
+            referencedTableSchemaName: public
+            validate: true
+  - changeSet:
+      id: addForeignKeyForUserID
+      author: Ekaterina Gorshunova
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: bookHistory
+            baseColumnNames: userID
+            baseTableSchemaName: public
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: userID-constraint-bh
+            referencedTableSchemaName: public
+            validate: true

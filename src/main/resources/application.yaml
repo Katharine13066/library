@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://ec2-63-35-156-160.eu-west-1.compute.amazonaws.com:5432/dbt4080qq40tim
+    username: obuxdcdgtplsmv
+    password: 518637a1b142b924afc832e625b89e51e4b627e94726c2d6fdb8d9b6b84c4aac
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    enabled: true
+    change-log: classpath:changelog/db.changelog-master.yaml
