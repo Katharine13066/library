@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Ekaterina Gorshunova
       changes:
         - createTable:
-            tableName: bookHistory
+            tableName: bookhistory
             columns:
               - column:
                   name: id
@@ -14,22 +14,22 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: bookID
+                  name: book_id
                   type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: userID
+                  name: user_id
                   type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: startDate
+                  name: start_date
                   type: date
                   constraints:
                     nullable: false
               - column:
-                  name: returnDate
+                  name: return_date
                   type: date
                   constraints:
                     nullable: false
@@ -38,12 +38,14 @@ databaseChangeLog:
       author: Ekaterina Gorshunova
       changes:
         - addForeignKeyConstraint:
-            baseTableName: bookHistory
-            baseColumnNames: bookID
+            baseTableName: bookhistory
+            baseColumnNames: book_id
             baseTableSchemaName: public
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedTableName: books
             referencedColumnNames: id
-            constraintName: bookID-constraint-bh
+            constraintName: book_id-constraint-bh
             referencedTableSchemaName: public
             validate: true
   - changeSet:
@@ -51,11 +53,13 @@ databaseChangeLog:
       author: Ekaterina Gorshunova
       changes:
         - addForeignKeyConstraint:
-            baseTableName: bookHistory
-            baseColumnNames: userID
+            baseTableName: bookhistory
+            baseColumnNames: user_id
             baseTableSchemaName: public
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedTableName: users
             referencedColumnNames: id
-            constraintName: userID-constraint-bh
+            constraintName: user_id-constraint-bh
             referencedTableSchemaName: public
             validate: true

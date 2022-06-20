@@ -14,12 +14,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: userID
+                  name: user_id
                   type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: bookID
+                  name: book_id
                   type: bigint
                   constraints:
                     nullable: false
@@ -32,11 +32,13 @@ databaseChangeLog:
       changes:
         - addForeignKeyConstraint:
             baseTableName: feedback
-            baseColumnNames: bookID
+            baseColumnNames: book_id
             baseTableSchemaName:  public
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedTableName: books
             referencedColumnNames: id
-            constraintName: bookID-constraint
+            constraintName: book_id-constraint
             referencedTableSchemaName: public
             validate: true
   - changeSet:
@@ -45,10 +47,12 @@ databaseChangeLog:
       changes:
         - addForeignKeyConstraint:
             baseTableName: feedback
-            baseColumnNames: userID
+            baseColumnNames: user_id
             baseTableSchemaName: public
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedTableName: users
             referencedColumnNames: id
-            constraintName: userID-constraint
+            constraintName: user_id-constraint
             referencedTableSchemaName: public
             validate: true

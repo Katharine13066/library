@@ -4,15 +4,15 @@ databaseChangeLog:
       author: Ekaterina Gorshunova
       changes:
         - createTable:
-            tableName: bookAuthor
+            tableName: book_author
             columns:
               - column:
-                  name: bookID
+                  name: book_id
                   type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: authorID
+                  name: author_id
                   type: bigint
                   constraints:
                     nullable: false
@@ -22,22 +22,24 @@ databaseChangeLog:
       changes:
         - addPrimaryKey:
             clustered: true
-            columnNames: bookID, authorID
+            columnNames: book_id, author_id
             constraintName: book_author_pk
             schemaName: public
-            tableName: bookAuthor
+            tableName: book_author
             validate: true
   - changeSet:
       id: addForeignKeyForBookAuthor1
       author: Ekaterina Gorshunova
       changes:
         - addForeignKeyConstraint:
-            baseTableName: bookAuthor
-            baseColumnNames: bookID
+            baseTableName: book_author
+            baseColumnNames: book_id
             baseTableSchemaName: public
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedTableName: books
             referencedColumnNames: id
-            constraintName: bookID-pk-fk-constraint
+            constraintName: book_id-pk-fk-constraint
             referencedTableSchemaName: public
             validate: true
   - changeSet:
@@ -45,11 +47,13 @@ databaseChangeLog:
       author: Ekaterina Gorshunova
       changes:
         - addForeignKeyConstraint:
-            baseTableName: bookAuthor
-            baseColumnNames: authorID
+            baseTableName: book_author
+            baseColumnNames: author_id
             baseTableSchemaName: public
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedTableName: authors
             referencedColumnNames: id
-            constraintName: authorID-pk-fk-constraint
+            constraintName: author_id-pk-fk-constraint
             referencedTableSchemaName: public
             validate: true

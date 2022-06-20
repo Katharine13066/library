@@ -14,12 +14,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: userName
+                  name: user_name
                   type: varchar(100)
                   constraints:
                     nullable: false
               - column:
-                  name: phoneNumber
+                  name: phone_number
                   type: varchar(200)
                   constraints:
                     unique: true
@@ -34,7 +34,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: passwordHash
+                  name: password_hash
                   type: bigint
                   constraints:
                     unique: true

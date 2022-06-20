@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence-unit name="LibraryPersistence" transaction-type="RESOURCE_LOCAL">
+    <class>by.intexsoft.study.daomodel.Book</class>
+    <class>by.intexsoft.study.daomodel.Author</class>
+    <class>by.intexsoft.study.daomodel.User</class>
+    <class>by.intexsoft.study.daomodel.Feedback</class>
+    <class>by.intexsoft.study.daomodel.BookHistory</class>
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+        <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-63-35-156-160.eu-west-1.compute.amazonaws.com:5432/dbt4080qq40tim" />
+        <property name="javax.persistence.jdbc.user" value="obuxdcdgtplsmv" />
+        <property name="javax.persistence.jdbc.password" value="518637a1b142b924afc832e625b89e51e4b627e94726c2d6fdb8d9b6b84c4aac" />
+    </properties>
+</persistence-unit>
+</persistence>

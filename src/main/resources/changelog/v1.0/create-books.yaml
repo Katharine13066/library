@@ -14,7 +14,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: bookName
+                  name: book_name
                   type: varchar(100)
                   constraints:
                     nullable: false
@@ -24,7 +24,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: publicationDate
+                  name: publication_date
                   type: varchar(20)
                   constraints:
                     nullable: false
