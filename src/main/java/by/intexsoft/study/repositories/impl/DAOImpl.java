@@ -1,6 +1,6 @@
-package by.intexsoft.study.dao.impl;
+package by.intexsoft.study.repositories.impl;
 
-import by.intexsoft.study.dao.DAO;
+import by.intexsoft.study.repositories.DAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

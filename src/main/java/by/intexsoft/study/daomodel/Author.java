@@ -31,6 +31,12 @@ public class Author implements Serializable {
     @Column(name = "age")
     private Integer age;
 
+    @ManyToMany
+    @JoinTable(name="book_author",
+            joinColumns = @JoinColumn(name="author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> books;
+
     public Author(){}
 
     public Author(Long id, String authorName, String phoneNumber, String email, Integer age) {
@@ -48,11 +54,6 @@ public class Author implements Serializable {
         this.age = age;
     }
 
-    @ManyToMany
-    @JoinTable(name="book_author",
-            joinColumns = @JoinColumn(name="author_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<Book> books;
 
     public List<Book> getBooks() {
         return books;

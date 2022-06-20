@@ -1,4 +1,4 @@
-package by.intexsoft.study.dao;
+package by.intexsoft.study.repositories;
 
 import java.util.List;
 

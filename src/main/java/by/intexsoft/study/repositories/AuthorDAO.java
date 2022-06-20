@@ -1,8 +1,6 @@
-package by.intexsoft.study.dao;
+package by.intexsoft.study.repositories;
 
 import by.intexsoft.study.daomodel.Author;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface AuthorDAO extends DAO<Author> {
 }

@@ -1,6 +1,6 @@
 package by.intexsoft.study.service.impl;
 
-import by.intexsoft.study.dao.AuthorDAO;
+import by.intexsoft.study.repositories.AuthorDAO;
 import by.intexsoft.study.daomodel.Author;
 import by.intexsoft.study.dto.AuthorDTO;
 import by.intexsoft.study.mappers.AuthorMapper;
