@@ -1,0 +1,56 @@
+get:
+  tags:
+    - Authors Controller
+  summary: Get all authors
+  operationId: findAllAuthors
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/AuthorDTO.yaml'
+put:
+  tags:
+    - Authors Controller
+  summary: Update author
+  operationId: updateAuthor
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/AuthorDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+post:
+  tags:
+    - Authors Controller
+  summary: Create new author
+  operationId: createAuthor
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/AuthorDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+patch:
+  tags:
+    - Authors Controller
+  summary: Patch method
+  operationId: patchAuthor
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/AuthorDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK

@@ -1,0 +1,10 @@
+delete:
+  tags:
+    - Authors Controller
+  summary: Delete author by id
+  operationId: deleteAuthorById
+  parameters:
+    - $ref: '../parameters/id.yaml'
+  responses:
+    '200':
+      description: OK

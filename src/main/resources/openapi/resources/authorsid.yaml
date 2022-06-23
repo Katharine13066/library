@@ -1,0 +1,14 @@
+get:
+  tags:
+    - Authors Controller
+  summary: Get author by id
+  operationId: findByIdAuthor
+  parameters:
+    - $ref: '../parameters/id.yaml'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/AuthorDTO.yaml'

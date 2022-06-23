@@ -1,0 +1,4 @@
+AuthorDTO:
+  $ref: "./AuthorDTO.yaml"
+BookDTO:
+  $ref: "./BookDTO.yaml"

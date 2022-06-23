@@ -1,0 +1,14 @@
+get:
+  tags:
+    - Books Controller
+  summary: Get book by id
+  operationId: findByIdBook
+  parameters:
+    - $ref:  '../parameters/id.yaml'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/BookDTO.yaml'

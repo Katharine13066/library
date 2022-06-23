@@ -1,8 +1,8 @@
 package by.intexsoft.study.service.impl;
 
+import by.intexsoft.study.model.BookDTO;
 import by.intexsoft.study.repositories.BookDAO;
 import by.intexsoft.study.daomodel.Book;
-import by.intexsoft.study.dto.BookDTO;
 import by.intexsoft.study.mappers.BookMapper;
 import by.intexsoft.study.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Service
+@Service("bookService")
 public class BookServiceImpl implements LibraryService<BookDTO> {
 
     @Autowired

@@ -1,7 +1,7 @@
 package by.intexsoft.study.mappers;
 
 import by.intexsoft.study.daomodel.Book;
-import by.intexsoft.study.dto.BookDTO;
+import by.intexsoft.study.model.BookDTO;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
