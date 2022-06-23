@@ -1,7 +1,7 @@
 package by.intexsoft.study.mappers;
 
 import by.intexsoft.study.daomodel.Author;
-import by.intexsoft.study.dto.AuthorDTO;
+import by.intexsoft.study.model.AuthorDTO;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -21,7 +21,6 @@ public interface AuthorMapper {
     @InheritInverseConfiguration
     Author fromDTO(AuthorDTO authorDTO);
     List<AuthorDTO> toDTOs(List<Author> authors);
-
 
     @InheritConfiguration
     @Mapping(target = "id", ignore = true)

@@ -1,0 +1,8 @@
+delete:
+  tags:
+    - Authors Controller
+  summary: Delete all authors
+  operationId: deleteAllAuthors
+  responses:
+    '200':
+      description: OK

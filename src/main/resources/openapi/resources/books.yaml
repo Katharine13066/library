@@ -1,0 +1,56 @@
+get:
+  tags:
+    - Books Controller
+  summary: Get all books
+  operationId: findAllBooks
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/BookDTO.yaml'
+put:
+  tags:
+    - Books Controller
+  summary: Update book
+  operationId: updateBook
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/BookDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+post:
+  tags:
+    - Books Controller
+  summary: Create new book
+  operationId: createBook
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/BookDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+patch:
+  tags:
+    - Books Controller
+  summary: Patch method
+  operationId: patchBook
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/BookDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK

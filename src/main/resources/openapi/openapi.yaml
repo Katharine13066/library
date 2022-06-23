@@ -1,0 +1,30 @@
+openapi: 3.0.1
+info:
+  title: Library Swagger Api
+  contact:
+    name: Ekaterina Gorshunova
+    email: ekaterina.gorshunova@intexsoft.by
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /books:
+    $ref: './resources/books.yaml'
+  /authors:
+    $ref: './resources/authors.yaml'
+  /books/{id}:
+    $ref: './resources/booksid.yaml'
+  /authors/{id}:
+    $ref: './resources/authorsid.yaml'
+  /books/deleteAll:
+    $ref: './resources/booksdeleteAll.yaml'
+  /books/delete/{id}:
+    $ref: './resources/booksdeleteid.yaml'
+  /authors/deleteAll:
+    $ref: './resources/authorsdeleteAll.yaml'
+  /authors/delete/{id}:
+    $ref: './resources/authorsdeleteid.yaml'
+components:
+  schemas:
+    $ref: "./schemas/_index.yaml"

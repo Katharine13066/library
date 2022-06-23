@@ -1,0 +1,31 @@
+type: object
+required:
+  - id
+  - authorName
+  - phoneNumber
+  - email
+  - age
+  - bookDTOList
+properties:
+  id:
+    type: integer
+    description: ID
+    format: int64
+  authorName:
+    type: string
+    description: Author name
+  phoneNumber:
+    type: string
+    description: Phone number
+  email:
+    type: string
+    description: Email
+  age:
+    type: integer
+    description: Age
+    format: int32
+  bookDTOList:
+    type: array
+    description: Book(s)
+    items:
+      $ref: "./BookDTO.yaml"

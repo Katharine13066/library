@@ -1,0 +1,8 @@
+delete:
+  tags:
+    - Books Controller
+  summary: Delete all books
+  operationId: deleteAllBooks
+  responses:
+    '200':
+      description: OK

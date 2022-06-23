@@ -1,8 +1,8 @@
 package by.intexsoft.study.service.impl;
 
+import by.intexsoft.study.model.AuthorDTO;
 import by.intexsoft.study.repositories.AuthorDAO;
 import by.intexsoft.study.daomodel.Author;
-import by.intexsoft.study.dto.AuthorDTO;
 import by.intexsoft.study.mappers.AuthorMapper;
 import by.intexsoft.study.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
-public class AuthorServiceImpl implements LibraryService<AuthorDTO> {
+@Service("authorService")
+public class AuthorServiceImpl implements LibraryService<AuthorDTO>  {
 
     @Autowired
     private AuthorDAO authorDAO;

@@ -1,0 +1,10 @@
+delete:
+  tags:
+    - Books Controller
+  summary: Delete book by id
+  operationId: deleteBookById
+  parameters:
+    - $ref:  '../parameters/id.yaml'
+  responses:
+    '200':
+      description: OK
