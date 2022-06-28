@@ -1,0 +1,8 @@
+delete:
+  tags:
+    - BookHistory Controller
+  summary: Delete all bookHistory
+  operationId: deleteAllBookHistory
+  responses:
+    '200':
+      description: OK

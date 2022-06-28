@@ -139,6 +139,7 @@
                                 <apiPackage>by.intexsoft.study.api</apiPackage>
                                 <modelPackage>by.intexsoft.study.model</modelPackage>
                                 <configPackage>by.intexsoft.study.config</configPackage>
+                                <skipValidateSpec>true</skipValidateSpec>
                             </configOptions>
                         </configuration>
                     </execution>

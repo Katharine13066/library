@@ -25,6 +25,39 @@ paths:
     $ref: './resources/authorsdeleteAll.yaml'
   /authors/delete/{id}:
     $ref: './resources/authorsdeleteid.yaml'
+  /users:
+    $ref: './resources/users.yaml'
+  /users/{id}:
+    $ref: './resources/usersid.yaml'
+  /users/deleteAll:
+    $ref: './resources/usersdeleteAll.yaml'
+  /users/delete/{id}:
+    $ref: './resources/usersdeleteid.yaml'
+  /feedback:
+    $ref: './resources/feedback.yaml'
+  /feedback/{id}:
+    $ref: './resources/feedbackid.yaml'
+  /feedback/deleteAll:
+    $ref: './resources/feedbackdeleteAll.yaml'
+  /feedback/delete/{id}:
+    $ref: './resources/feedbackdeleteid.yaml'
+  /bookhistory:
+    $ref: './resources/bookhistory.yaml'
+  /bookhistory/{id}:
+    $ref: './resources/bookhistoryid.yaml'
+  /bookhistory/deleteAll:
+    $ref: './resources/bookhistorydeleteAll.yaml'
+  /bookhistory/delete/{id}:
+    $ref: './resources/bookhistorydeleteid.yaml'
 components:
   schemas:
-    $ref: "./schemas/_index.yaml"
+    AuthorDTO:
+      $ref: './schemas/AuthorDTO.yaml'
+    BookDTO:
+      $ref: './schemas/BookDTO.yaml'
+    UserDTO:
+      $ref: './schemas/UserDTO.yaml'
+    FeedbackDTO:
+      $ref: './schemas/FeedbackDTO.yaml'
+    BookHistoryDTO:
+      $ref: './schemas/BookHistoryDTO.yaml'

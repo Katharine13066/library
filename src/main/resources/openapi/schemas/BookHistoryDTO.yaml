@@ -1,0 +1,26 @@
+type: object
+required:
+  - id
+  - userID
+  - bookID
+  - startDate
+  - returnDate
+properties:
+  id:
+    type: integer
+    description: ID
+    format: int64
+  userID:
+    type: integer
+    description: User ID
+    format: int64
+  bookID:
+    type: integer
+    description: Book ID
+    format: int64
+  startDate:
+    type: string
+    description: Start Date
+  returnDate:
+    type: string
+    description: Return Date

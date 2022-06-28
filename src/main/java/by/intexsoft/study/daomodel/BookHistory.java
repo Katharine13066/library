@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name="bookhistory")
@@ -26,25 +25,30 @@ public class BookHistory implements Serializable {
     private Long userID;
 
     @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    private String startDate;
 
     @Column(name = "return_date", nullable = false)
-    private Date returnDate;
+    private String returnDate;
 
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book books;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User users;
-
-    public User getUsers() {
-        return users;
+    public BookHistory(Long id, Long bookID, Long userID, String startDate, String returnDate, Book books) {
+        this.id = id;
+        this.bookID = bookID;
+        this.userID = userID;
+        this.startDate = startDate;
+        this.returnDate = returnDate;
+        this.books = books;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public BookHistory(Long bookID, Long userID, String startDate, String returnDate, Book books) {
+        this.bookID = bookID;
+        this.userID = userID;
+        this.startDate = startDate;
+        this.returnDate = returnDate;
+        this.books = books;
     }
 
     public Book getBooks() {
@@ -56,8 +60,6 @@ public class BookHistory implements Serializable {
     }
 
     public BookHistory(){}
-
-
 
     public Long getId() {
         return id;
@@ -83,19 +85,19 @@ public class BookHistory implements Serializable {
         this.userID = userID;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 }

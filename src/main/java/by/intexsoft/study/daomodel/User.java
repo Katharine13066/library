@@ -5,11 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -34,14 +31,6 @@ public class User implements Serializable {
     @Column(name = "password_hash",unique = true, nullable = false)
     private Long passwordHash;
 
-    @OneToMany(/*mappedBy="users"*/)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private List<BookHistory> bookHistoryList;
-
-    @OneToMany(/*mappedBy="users"*/)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private List<Feedback> feedbacks;
-
     public User(){}
 
     public User(String userName, String phoneNumber, String email, String birthday, Long passwordHash) {
@@ -52,49 +41,13 @@ public class User implements Serializable {
         this.passwordHash = passwordHash;
     }
 
-    public User(Long id, String userName, String phoneNumber, String email, String birthday, Long passwordHash, List<BookHistory> bookHistoryList, List<Feedback> feedbacks) {
+    public User(Long id, String userName, String phoneNumber, String email, String birthday, Long passwordHash) {
         this.id = id;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.birthday = birthday;
         this.passwordHash = passwordHash;
-        this.bookHistoryList = bookHistoryList;
-        this.feedbacks = feedbacks;
-    }
-
-    public void addFeedback(Feedback feedback){
-        feedback.setUsers(this);
-        feedbacks.add(feedback);
-    }
-
-    public void removeFeedback(Feedback feedback){
-        feedbacks.remove(feedback);
-    }
-
-    public void addBookHistory(BookHistory bookHistory){
-        bookHistory.setUsers(this);
-        bookHistoryList.add(bookHistory);
-    }
-
-    public void removeBookHistory(BookHistory bookHistory){
-        bookHistoryList.remove(bookHistory);
-    }
-
-    public List<BookHistory> getBookHistoryList() {
-        return bookHistoryList;
-    }
-
-    public void setBookHistoryList(List<BookHistory> bookHistoryList) {
-        this.bookHistoryList = bookHistoryList;
-    }
-
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(List<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
     }
 
     public Long getId() {

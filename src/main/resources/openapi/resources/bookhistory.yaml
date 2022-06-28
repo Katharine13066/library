@@ -1,0 +1,56 @@
+get:
+  tags:
+    - BookHistory Controller
+  summary: Get all books
+  operationId: findAllBookHistory
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/BookHistoryDTO.yaml'
+put:
+  tags:
+    - BookHistory Controller
+  summary: Update bookHistory
+  operationId: updateBookHistory
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/BookHistoryDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+post:
+  tags:
+    - BookHistory Controller
+  summary: Create new bookHistory
+  operationId: createBookHistory
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/BookHistoryDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+patch:
+  tags:
+    - BookHistory Controller
+  summary: Patch method
+  operationId: patchBookHistory
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/BookHistoryDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK

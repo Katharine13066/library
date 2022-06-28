@@ -1,31 +1,29 @@
 type: object
 required:
   - id
-  - authorName
+  - userName
   - phoneNumber
   - email
-  - age
-  - bookDTOList
+  - birthday
+  - passwordHash
 properties:
   id:
     type: integer
     description: ID
     format: int64
-  authorName:
+  userName:
     type: string
-    description: Author name
+    description: User name
   phoneNumber:
     type: string
     description: Phone number
   email:
     type: string
     description: Email
-  age:
+  birthday:
+    type: string
+    description: Birthday
+  passwordHash:
     type: integer
-    description: Age
-    format: int32
-  bookDTOList:
-    type: array
-    description: Book(s)
-    items:
-      $ref: './BookDTO.yaml'
+    description: Password Hash
+    format: int64

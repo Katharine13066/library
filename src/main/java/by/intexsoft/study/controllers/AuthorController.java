@@ -2,7 +2,7 @@ package by.intexsoft.study.controllers;
 
 import by.intexsoft.study.api.AuthorsApi;
 import by.intexsoft.study.model.AuthorDTO;
-import by.intexsoft.study.service.LibraryService;
+import by.intexsoft.study.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -14,10 +14,10 @@ import java.util.List;
 @RestController
 public class AuthorController implements AuthorsApi {
 
-    private LibraryService<AuthorDTO> authorService;
+    private AuthorService authorService;
 
     @Autowired
-    public AuthorController(@Qualifier("authorService")LibraryService<AuthorDTO> authorService) {
+    public AuthorController(@Qualifier("authorService")AuthorService authorService) {
         this.authorService = authorService;
     }
 
@@ -60,5 +60,7 @@ public class AuthorController implements AuthorsApi {
         authorService.update(authorDTO);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
+
+
 
 }

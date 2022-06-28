@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -34,21 +35,35 @@ public class Book implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors;
 
+    @OneToMany
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private List<BookHistory> bookHistoryList;
+
+    @OneToMany
+    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    private List<Feedback> feedbacks;
+
     public Book(){}
 
-    public Book(Long id, String bookName, String publisher, String publicationDate, Boolean status) {
+    public Book(Long id, String bookName, String publisher, String publicationDate, Boolean status, List<Author> authors, List<BookHistory> bookHistoryList, List<Feedback> feedbacks) {
         this.id = id;
         this.bookName = bookName;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
         this.status = status;
+        this.authors = authors;
+        this.bookHistoryList = bookHistoryList;
+        this.feedbacks = feedbacks;
     }
 
-    public Book(String bookName, String publisher, String publicationDate, Boolean status) {
+    public Book(String bookName, String publisher, String publicationDate, Boolean status, List<Author> authors, List<BookHistory> bookHistoryList, List<Feedback> feedbacks) {
         this.bookName = bookName;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
         this.status = status;
+        this.authors = authors;
+        this.bookHistoryList = bookHistoryList;
+        this.feedbacks = feedbacks;
     }
 
     public List<Author> getAuthors() {
@@ -99,4 +114,19 @@ public class Book implements Serializable {
         this.status = status;
     }
 
+    public List<BookHistory> getBookHistoryList() {
+        return bookHistoryList;
+    }
+
+    public void setBookHistoryList(List<BookHistory> bookHistoryList) {
+        this.bookHistoryList = bookHistoryList;
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
 }

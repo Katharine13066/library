@@ -1,0 +1,56 @@
+get:
+  tags:
+    - Users Controller
+  summary: Get all users
+  operationId: findAllUsers
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/UserDTO.yaml'
+put:
+  tags:
+    - Users Controller
+  summary: Update user
+  operationId: updateUser
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/UserDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+post:
+  tags:
+    - Users Controller
+  summary: Create new user
+  operationId: createUser
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/UserDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+patch:
+  tags:
+    - Users Controller
+  summary: Patch method
+  operationId: patchUser
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/UserDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK

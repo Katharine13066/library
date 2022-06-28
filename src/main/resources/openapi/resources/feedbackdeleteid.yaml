@@ -1,0 +1,10 @@
+delete:
+  tags:
+    - Feedback Controller
+  summary: Delete feedback by id
+  operationId: deleteFeedbackById
+  parameters:
+    - $ref: '../parameters/id.yaml'
+  responses:
+    '200':
+      description: OK

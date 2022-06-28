@@ -31,16 +31,21 @@ public class Feedback implements Serializable {
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book books;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User users;
+    public Feedback(){}
 
-    public User getUsers() {
-        return users;
+    public Feedback(Long id, Long userID, Long bookID, String comments, Book books) {
+        this.id = id;
+        this.userID = userID;
+        this.bookID = bookID;
+        this.comments = comments;
+        this.books = books;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public Feedback(Long userID, Long bookID, String comments, Book books) {
+        this.userID = userID;
+        this.bookID = bookID;
+        this.comments = comments;
+        this.books = books;
     }
 
     public Book getBooks() {

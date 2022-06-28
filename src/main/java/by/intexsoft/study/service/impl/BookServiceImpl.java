@@ -1,10 +1,10 @@
 package by.intexsoft.study.service.impl;
 
-import by.intexsoft.study.model.BookDTO;
-import by.intexsoft.study.repositories.BookDAO;
 import by.intexsoft.study.daomodel.Book;
 import by.intexsoft.study.mappers.BookMapper;
-import by.intexsoft.study.service.LibraryService;
+import by.intexsoft.study.model.BookDTO;
+import by.intexsoft.study.repositories.BookDAO;
+import by.intexsoft.study.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service("bookService")
-public class BookServiceImpl implements LibraryService<BookDTO> {
+public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookDAO bookDAO;
@@ -37,11 +37,13 @@ public class BookServiceImpl implements LibraryService<BookDTO> {
         return bookMapper.toDTOs(bookList);
     }
 
+    @Override
     @Transactional
     public void deleteAll(){
         bookDAO.deleteAll();
     }
 
+    @Override
     @Transactional
     public void deleteById(Long id){
         bookDAO.deleteById(id);
@@ -60,10 +62,9 @@ public class BookServiceImpl implements LibraryService<BookDTO> {
     }
 
     @Override
+    @Transactional
     public void patch(BookDTO bookDTO) {
         Book book = bookDAO.findById(bookDTO.getId());
-        bookMapper.updateBookrFromDto(bookDTO, book);
+        bookMapper.updateBookFromDto(bookDTO, book);
     }
-
-
 }

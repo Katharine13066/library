@@ -1,0 +1,8 @@
+delete:
+  tags:
+    - Users Controller
+  summary: Delete all users
+  operationId: deleteAllUsers
+  responses:
+    '200':
+      description: OK

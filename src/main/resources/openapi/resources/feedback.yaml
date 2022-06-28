@@ -1,0 +1,56 @@
+get:
+  tags:
+    - Feedback Controller
+  summary: Get all feedbacks
+  operationId: findAllFeedbacks
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/FeedbackDTO.yaml'
+put:
+  tags:
+    - Feedback Controller
+  summary: Update feedback
+  operationId: updateFeedback
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/FeedbackDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+post:
+  tags:
+    - Feedback Controller
+  summary: Create new feedback
+  operationId: createFeedback
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/FeedbackDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK
+patch:
+  tags:
+    - Feedback Controller
+  summary: Patch method
+  operationId: patchFeedback
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/FeedbackDTO.yaml'
+    required: true
+  responses:
+    '200':
+      description: OK

@@ -2,22 +2,26 @@ package by.intexsoft.study.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.util.List;
+@Schema(description = "User Entrity")
+public class UserDTO{
 
-@Schema(description = "Author Entity")
-public class AuthorDTO {
     @Schema(description = "ID")
     private Long id;
-    @Schema(description = "Author name")
-    private String authorName;
+
+    @Schema(description = "User name")
+    private String userName;
+
     @Schema(description = "Phone number")
     private String phoneNumber;
+
     @Schema(description = "Email")
     private String email;
-    @Schema(description = "Age")
-    private Integer age;
-    @Schema(description = "Book(s)")
-    private List<BookDTO> bookDTOList;
+
+    @Schema(description = "Birthday")
+    private String birthday;
+
+    @Schema(description = "Password Hash")
+    private Long passwordHash;
 
     public Long getId() {
         return id;
@@ -27,12 +31,12 @@ public class AuthorDTO {
         this.id = id;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhoneNumber() {
@@ -51,19 +55,21 @@ public class AuthorDTO {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    public List<BookDTO> getBookDTOList() {
-        return bookDTOList;
+    public Long getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setBookDTOList(List<BookDTO> bookDTOList) {
-        this.bookDTOList = bookDTOList;
+    public void setPasswordHash(Long passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
+
+

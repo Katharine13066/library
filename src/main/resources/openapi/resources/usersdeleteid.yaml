@@ -1,0 +1,10 @@
+delete:
+  tags:
+    - Users Controller
+  summary: Delete user by id
+  operationId: deleteUserById
+  parameters:
+    - $ref:  '../parameters/id.yaml'
+  responses:
+    '200':
+      description: OK

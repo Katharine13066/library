@@ -1,0 +1,10 @@
+delete:
+  tags:
+    - BookHistory Controller
+  summary: Delete bookHistory by id
+  operationId: deleteBookHistoryById
+  parameters:
+    - $ref:  '../parameters/id.yaml'
+  responses:
+    '200':
+      description: OK

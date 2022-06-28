@@ -1,0 +1,8 @@
+delete:
+  tags:
+    - Feedback Controller
+  summary: Delete all feedbacks
+  operationId: deleteAllFeedbacks
+  responses:
+    '200':
+      description: OK

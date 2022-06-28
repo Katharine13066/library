@@ -6,6 +6,8 @@ required:
   - publicationDate
   - status
   - authorDTOList
+  - bookhistories
+  - feedbacks
 properties:
   id:
     type: integer
@@ -27,5 +29,14 @@ properties:
     type: array
     description: Author(s)
     items:
-      $ref: "./AuthorDTO.yaml"
-
+      $ref: './AuthorDTO.yaml'
+  bookhistories:
+    type: array
+    description: BookHistory List
+    items:
+      $ref: './BookHistoryDTO.yaml'
+  feedbacks:
+    type: array
+    description: Feedback(s)
+    items:
+      $ref: './FeedbackDTO.yaml'

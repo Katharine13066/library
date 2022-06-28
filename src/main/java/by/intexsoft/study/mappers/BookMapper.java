@@ -8,16 +8,19 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = AuthorMapper.class)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {AuthorMapper.class, BookHistoryMapper.class, FeedbackMapper.class}, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface BookMapper {
 
     BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
     @Mapping(source = "authors", target = "authorDTOList")
+    @Mapping(source = "bookHistoryList", target = "bookhistories")
+    @Mapping(source = "feedbacks", target = "feedbacks")
     BookDTO toDTO(Book book);
 
     List<BookDTO> toDTOs(List<Book> authors);
@@ -27,5 +30,5 @@ public interface BookMapper {
 
     @InheritConfiguration
     @Mapping(target = "id", ignore = true)
-    void updateBookrFromDto(BookDTO bookDTO, @MappingTarget Book book);
+    void updateBookFromDto(BookDTO bookDTO, @MappingTarget Book book);
 }

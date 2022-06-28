@@ -25,12 +25,12 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: start_date
-                  type: date
+                  type: varchar(200)
                   constraints:
                     nullable: false
               - column:
                   name: return_date
-                  type: date
+                  type: varchar(200)
                   constraints:
                     nullable: false
   - changeSet:
