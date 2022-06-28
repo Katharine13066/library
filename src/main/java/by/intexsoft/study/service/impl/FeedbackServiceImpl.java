@@ -74,4 +74,10 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedbackMapper.updateFeedbackFromDto(feedbackDTO, feedback);
 
     }
+
+    @Override
+    public List<FeedbackDTO> getFeedbacksByBookId(Long book_id) {
+        List<Feedback> feedbacks = feedbackDAO.findFeedbacksByBookId(book_id);
+        return feedbackMapper.toDTOs(feedbacks);
+    }
 }

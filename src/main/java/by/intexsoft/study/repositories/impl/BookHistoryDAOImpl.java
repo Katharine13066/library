@@ -1,13 +1,16 @@
 package by.intexsoft.study.repositories.impl;
 
 import by.intexsoft.study.daomodel.BookHistory;
-import by.intexsoft.study.model.BookHistoryDTO;
 import by.intexsoft.study.repositories.BookHistoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -20,12 +23,25 @@ public class BookHistoryDAOImpl extends DAOImpl<BookHistory> implements BookHist
 
 
     @Override
-    public List<BookHistoryDTO> findBookHistoryByBookAndUserIds(Long book_id, Long user_id) {
-        Query query = getEntityManager().createQuery("FROM BookHistory where book_id =:book_id and user_id =:user_id");
-        query.setParameter("book_id", book_id);
-        query.setParameter("user_id", user_id);
-        List<BookHistoryDTO> list = query.getResultList();
-        return list;
+    public List<BookHistory> findBookHistoryByBookAndUserIds(Long book_id, Long user_id) {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<BookHistory> criteriaQuery = criteriaBuilder.createQuery(BookHistory.class);
+        Root<BookHistory> from = criteriaQuery.from(BookHistory.class);
+        criteriaQuery.select(from).where(criteriaBuilder.and(criteriaBuilder.equal(from.get("bookID"), book_id), criteriaBuilder.equal(from.get("userID"), user_id)));
+        TypedQuery<BookHistory> typedQuery = getEntityManager().createQuery(criteriaQuery);
+        List<BookHistory> result = typedQuery.getResultList();
+        return result;
+    }
+
+    @Override
+    public List<BookHistory> findBookHistoryByBookId(Long book_id) {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<BookHistory> query = criteriaBuilder.createQuery(BookHistory.class);
+        Root<BookHistory> from = query.from(BookHistory.class);
+        query.select(from).where(criteriaBuilder.equal(from.get("bookID"), book_id));
+        TypedQuery<BookHistory> typedQuery = getEntityManager().createQuery(query);
+        List<BookHistory> result = typedQuery.getResultList();
+        return result;
     }
 }
 

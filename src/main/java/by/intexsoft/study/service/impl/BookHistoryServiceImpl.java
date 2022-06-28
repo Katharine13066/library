@@ -73,7 +73,7 @@ public class BookHistoryServiceImpl implements BookHistoryService {
     }
 
     public BookHistoryDTO findBookHistoryByBookAndUserIds(Long book_id, Long user_id) {
-        List<BookHistoryDTO> list = bookHistoryDAO.findBookHistoryByBookAndUserIds(book_id, user_id);
+        List<BookHistoryDTO> list = bookHistoryMapper.toDTOs(bookHistoryDAO.findBookHistoryByBookAndUserIds(book_id, user_id));
         BookHistoryDTO bookHistory = new BookHistoryDTO();
         for (int i = 0; i < list.size(); i++){
             if(list.get(i).getReturnDate().isEmpty()){
@@ -81,6 +81,12 @@ public class BookHistoryServiceImpl implements BookHistoryService {
             }
         }
         return bookHistory;
+    }
+
+    @Override
+    public List<BookHistoryDTO> findBookHistoryByBookId(Long book_id) {
+        List<BookHistory> bookHistories = bookHistoryDAO.findBookHistoryByBookId(book_id);
+        return bookHistoryMapper.toDTOs(bookHistories);
     }
 
 }

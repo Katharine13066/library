@@ -86,4 +86,9 @@ public class BookHistoryController implements BookhistoryApi {
         bookHistory.setReturnDate(simpleDateFormat.format(curDate));
         updateBookHistory(bookHistory);
     }
+
+    @RequestMapping(value = "/book_history/{book_id}", method = RequestMethod.GET)
+    public List<BookHistoryDTO> getBookHistoryByBookId(@PathVariable Long book_id){
+        return bookHistoryService.findBookHistoryByBookId(book_id);
+    }
 }
