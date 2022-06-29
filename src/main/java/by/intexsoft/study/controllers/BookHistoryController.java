@@ -1,6 +1,8 @@
 package by.intexsoft.study.controllers;
 
 import by.intexsoft.study.api.BookhistoryApi;
+import by.intexsoft.study.model.AuthorDTO;
+import by.intexsoft.study.model.BookDTO;
 import by.intexsoft.study.model.BookHistoryDTO;
 import by.intexsoft.study.service.BookHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +75,7 @@ public class BookHistoryController implements BookhistoryApi {
         bookHistory.setBookID(book_id);
         bookHistory.setUserID(user_id);
         Date curDate = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-Mon-yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-Mon-yy");
         bookHistory.setStartDate(simpleDateFormat.format(curDate));
         createBookHistory(bookHistory);
     }
@@ -82,7 +84,7 @@ public class BookHistoryController implements BookhistoryApi {
     public void returnBook(@PathVariable Long book_id, @PathVariable Long user_id){
         BookHistoryDTO bookHistory = bookHistoryService.findBookHistoryByBookAndUserIds(book_id, user_id);
         Date curDate = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-Mon-yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-Mon-yy");
         bookHistory.setReturnDate(simpleDateFormat.format(curDate));
         updateBookHistory(bookHistory);
     }
@@ -90,5 +92,15 @@ public class BookHistoryController implements BookhistoryApi {
     @RequestMapping(value = "/book_history/{book_id}", method = RequestMethod.GET)
     public List<BookHistoryDTO> getBookHistoryByBookId(@PathVariable Long book_id){
         return bookHistoryService.findBookHistoryByBookId(book_id);
+    }
+
+    @RequestMapping(value = "/top10books", method = RequestMethod.GET)
+    public List<BookDTO> get10TheMostPopularBooks(){
+        return bookHistoryService.get10TheMostPopularBooks();
+    }
+
+    @RequestMapping(value = "/top10authors", method = RequestMethod.GET)
+    public List<AuthorDTO> get10TheMostPopularAuthors() {
+        return bookHistoryService.get10TheMostPopularAuthors();
     }
 }

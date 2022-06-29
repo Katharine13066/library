@@ -1,15 +1,19 @@
 package by.intexsoft.study.repositories.impl;
 
+import by.intexsoft.study.daomodel.Author;
+import by.intexsoft.study.daomodel.Book;
 import by.intexsoft.study.daomodel.BookHistory;
 import by.intexsoft.study.repositories.BookHistoryDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -42,6 +46,38 @@ public class BookHistoryDAOImpl extends DAOImpl<BookHistory> implements BookHist
         TypedQuery<BookHistory> typedQuery = getEntityManager().createQuery(query);
         List<BookHistory> result = typedQuery.getResultList();
         return result;
+    }
+
+    @Override
+    public List<Book> get10TheMostPopularBooks() {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Book> cq = criteriaBuilder.createQuery(Book.class);
+        Root<BookHistory> root = cq.from(BookHistory.class);
+        Join<BookHistory, Book> joinOnBooks =  root.join("books");
+        Expression<Long> count = criteriaBuilder.count(root.get("bookID"));
+        Expression<Long> countId = criteriaBuilder.count(root.get("id"));
+        cq.select(joinOnBooks).groupBy(joinOnBooks.get("bookName"), joinOnBooks.get("id"))
+                              .having(criteriaBuilder.gt(count, 0))
+                              .orderBy(criteriaBuilder.desc(countId));
+        List<Book> resultList = getEntityManager().createQuery(cq).getResultList();
+        return resultList;
+    }
+
+    @Override
+    public List<Author> get10TheMostPopularAuthors() {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Author> cq = criteriaBuilder.createQuery(Author.class);
+        Root<BookHistory> root = cq.from(BookHistory.class);
+        Join<BookHistory, Book> joinOnBooks =  root.join("books");
+        Join<Book, Author> joinOnAuthors =  joinOnBooks.join("authors");
+        Expression<Long> count = criteriaBuilder.count(root.get("bookID"));
+        Expression<Long> countId = criteriaBuilder.count(root.get("id"));
+        cq.select(joinOnAuthors)
+                .groupBy(joinOnAuthors.get("authorName"), joinOnAuthors.get("id"))
+                .having(criteriaBuilder.gt(count, 0))
+                .orderBy(criteriaBuilder.desc(countId));
+        List<Author> resultList = getEntityManager().createQuery(cq).getResultList();
+        return resultList;
     }
 }
 
