@@ -1,8 +1,8 @@
 package by.intexsoft.study.repositories.impl;
 
-import by.intexsoft.study.daomodel.Author;
-import by.intexsoft.study.daomodel.Book;
-import by.intexsoft.study.daomodel.BookHistory;
+import by.intexsoft.study.model.Author;
+import by.intexsoft.study.model.Book;
+import by.intexsoft.study.model.BookHistory;
 import by.intexsoft.study.repositories.BookHistoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

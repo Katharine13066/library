@@ -1,6 +1,6 @@
 package by.intexsoft.study.mappers;
 
-import by.intexsoft.study.daomodel.Feedback;
+import by.intexsoft.study.model.Feedback;
 import by.intexsoft.study.model.FeedbackDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;

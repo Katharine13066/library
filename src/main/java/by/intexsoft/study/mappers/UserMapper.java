@@ -1,6 +1,6 @@
 package by.intexsoft.study.mappers;
 
-import by.intexsoft.study.daomodel.User;
+import by.intexsoft.study.model.User;
 import by.intexsoft.study.model.UserDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;

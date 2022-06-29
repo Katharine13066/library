@@ -1,7 +1,7 @@
 package by.intexsoft.study.service.impl;
 
-import by.intexsoft.study.daomodel.Book;
-import by.intexsoft.study.daomodel.BookHistory;
+import by.intexsoft.study.model.Book;
+import by.intexsoft.study.model.BookHistory;
 import by.intexsoft.study.mappers.BookMapper;
 import by.intexsoft.study.model.BookDto;
 import by.intexsoft.study.repositories.BookDao;
