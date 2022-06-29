@@ -49,6 +49,10 @@ paths:
     $ref: './resources/bookhistorydeleteAll.yaml'
   /bookhistory/delete/{id}:
     $ref: './resources/bookhistorydeleteid.yaml'
+  /top10books:
+    $ref: './resources/top10books.yaml'
+  /top10authors:
+    $ref: './resources/top10authors.yaml'
 components:
   schemas:
     AuthorDTO:
