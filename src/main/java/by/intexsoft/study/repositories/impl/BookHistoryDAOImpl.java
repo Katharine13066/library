@@ -13,7 +13,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -59,8 +58,7 @@ public class BookHistoryDAOImpl extends DAOImpl<BookHistory> implements BookHist
         cq.select(joinOnBooks).groupBy(joinOnBooks.get("bookName"), joinOnBooks.get("id"))
                               .having(criteriaBuilder.gt(count, 0))
                               .orderBy(criteriaBuilder.desc(countId));
-        List<Book> resultList = getEntityManager().createQuery(cq).getResultList();
-        return resultList;
+        return getEntityManager().createQuery(cq).getResultList();
     }
 
     @Override
@@ -76,8 +74,7 @@ public class BookHistoryDAOImpl extends DAOImpl<BookHistory> implements BookHist
                 .groupBy(joinOnAuthors.get("authorName"), joinOnAuthors.get("id"))
                 .having(criteriaBuilder.gt(count, 0))
                 .orderBy(criteriaBuilder.desc(countId));
-        List<Author> resultList = getEntityManager().createQuery(cq).getResultList();
-        return resultList;
+        return getEntityManager().createQuery(cq).getResultList();
     }
 }
 

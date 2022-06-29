@@ -67,4 +67,18 @@ public class BookServiceImpl implements BookService {
         Book book = bookDAO.findById(bookDTO.getId());
         bookMapper.updateBookFromDto(bookDTO, book);
     }
+
+    @Override
+    public void takeBook(Long id) {
+        BookDTO book = findById(id);
+        book.setStatus(false);
+        update(book);
+    }
+
+    @Override
+    public void returnBook(Long id) {
+        BookDTO book = findById(id);
+        book.setStatus(true);
+        update(book);
+    }
 }

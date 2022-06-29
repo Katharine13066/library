@@ -68,15 +68,11 @@ public class BookController implements BooksApi {
 
     @RequestMapping(value = "/take_book/{id}", method = RequestMethod.PUT)
     public void takeBook(@PathVariable Long id){
-        BookDTO book = bookService.findById(id);
-        book.setStatus(false);
-        updateBook(book);
+        bookService.takeBook(id);
     }
 
     @RequestMapping(value = "/return_book/{id}", method = RequestMethod.PUT)
     public void returnBook(@PathVariable Long id){
-        BookDTO book = bookService.findById(id);
-        book.setStatus(true);
-        updateBook(book);
+        bookService.returnBook(id);
     }
 }
