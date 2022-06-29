@@ -1,4 +1,4 @@
-package by.intexsoft.study.model;
+package by.intexsoft.study.daomodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

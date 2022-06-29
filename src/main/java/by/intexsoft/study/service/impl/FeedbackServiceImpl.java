@@ -1,6 +1,6 @@
 package by.intexsoft.study.service.impl;
 
-import by.intexsoft.study.model.Feedback;
+import by.intexsoft.study.daomodel.Feedback;
 import by.intexsoft.study.mappers.FeedbackMapper;
 import by.intexsoft.study.model.FeedbackDto;
 import by.intexsoft.study.repositories.FeedbackDao;

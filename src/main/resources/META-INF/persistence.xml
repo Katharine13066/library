@@ -3,11 +3,11 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 <persistence-unit name="LibraryPersistence" transaction-type="RESOURCE_LOCAL">
-    <class>by.intexsoft.study.model.Book</class>
-    <class>by.intexsoft.study.model.Author</class>
-    <class>by.intexsoft.study.model.User</class>
-    <class>by.intexsoft.study.model.Feedback</class>
-    <class>by.intexsoft.study.model.BookHistory</class>
+    <class>by.intexsoft.study.daomodel.Book</class>
+    <class>by.intexsoft.study.daomodel.Author</class>
+    <class>by.intexsoft.study.daomodel.User</class>
+    <class>by.intexsoft.study.daomodel.Feedback</class>
+    <class>by.intexsoft.study.daomodel.BookHistory</class>
     <properties>
         <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
         <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-63-35-156-160.eu-west-1.compute.amazonaws.com:5432/dbt4080qq40tim" />

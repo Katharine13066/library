@@ -1,6 +1,6 @@
 package by.intexsoft.study.repositories.impl;
 
-import by.intexsoft.study.model.Feedback;
+import by.intexsoft.study.daomodel.Feedback;
 import by.intexsoft.study.repositories.FeedbackDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

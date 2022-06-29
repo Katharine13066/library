@@ -1,82 +1,34 @@
 package by.intexsoft.study.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-@Table(name= "books")
-public class Book implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "book_name", nullable = false)
+public class Book {
+    private String bookID;
     private String bookName;
-    @Column(name = "publisher", nullable = false)
+    private String authorID;
     private String publisher;
-    @Column(name = "publication_date", nullable = false)
     private String publicationDate;
-    @Column(name="status", nullable = false)
-    private Boolean status;
-    @ManyToMany
-    @JoinTable(name="book_author",
-            joinColumns = @JoinColumn(name="book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private List<Author> authors;
-    @OneToMany
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
-    private List<BookHistory> bookHistoryList;
-    @OneToMany
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
-    private List<Feedback> feedbacks;
 
     public Book(){}
 
-    public Book(Long id, String bookName, String publisher, String publicationDate, Boolean status, List<Author> authors, List<BookHistory> bookHistoryList, List<Feedback> feedbacks) {
-        this.id = id;
+    public Book(String bookID, String bookName, String authorID, String publisher, String publicationDate) {
+        this.bookID = bookID;
         this.bookName = bookName;
+        this.authorID = authorID;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
-        this.status = status;
-        this.authors = authors;
-        this.bookHistoryList = bookHistoryList;
-        this.feedbacks = feedbacks;
     }
 
-    public Book(String bookName, String publisher, String publicationDate, Boolean status, List<Author> authors, List<BookHistory> bookHistoryList, List<Feedback> feedbacks) {
+    public Book(String bookName, String authorID, String publisher, String publicationDate) {
         this.bookName = bookName;
+        this.authorID = authorID;
         this.publisher = publisher;
         this.publicationDate = publicationDate;
-        this.status = status;
-        this.authors = authors;
-        this.bookHistoryList = bookHistoryList;
-        this.feedbacks = feedbacks;
+    }
+    public String getBookID() {
+        return bookID;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setBookID(String bookID) {
+        this.bookID = bookID;
     }
 
     public String getBookName() {
@@ -85,6 +37,15 @@ public class Book implements Serializable {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+
+    public String getAuthorID() {
+        return authorID;
+    }
+
+    public void setAuthorID(String authorID) {
+        this.authorID = authorID;
     }
 
     public String getPublisher() {
@@ -103,30 +64,14 @@ public class Book implements Serializable {
         this.publicationDate = publicationDate;
     }
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public List<BookHistory> getBookHistoryList() {
-        if(bookHistoryList == null){
-            bookHistoryList = new ArrayList<>();
-        }
-        return bookHistoryList;
-    }
-
-    public void setBookHistoryList(List<BookHistory> bookHistoryList) {
-        this.bookHistoryList = bookHistoryList;
-    }
-
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(List<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookID='" + bookID + '\'' +
+                ", bookName='" + bookName + '\'' +
+                ", authorID='" + authorID + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publicationDate='" + publicationDate + '\'' +
+                '}';
     }
 }

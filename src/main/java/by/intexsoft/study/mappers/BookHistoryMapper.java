@@ -1,6 +1,6 @@
 package by.intexsoft.study.mappers;
 
-import by.intexsoft.study.model.BookHistory;
+import by.intexsoft.study.daomodel.BookHistory;
 import by.intexsoft.study.model.BookHistoryDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
