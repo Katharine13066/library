@@ -1,7 +1,7 @@
 package by.intexsoft.study.controllers;
 
 import by.intexsoft.study.api.BooksApi;
-import by.intexsoft.study.model.BookDTO;
+import by.intexsoft.study.model.BookDto;
 import by.intexsoft.study.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,8 +25,8 @@ public class BookController implements BooksApi {
     }
 
     @Override
-    public ResponseEntity<Void> createBook(BookDTO bookDTO) {
-        bookService.create(bookDTO);
+    public ResponseEntity<Void> createBook(BookDto bookDto) {
+        bookService.create(bookDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
@@ -43,36 +43,35 @@ public class BookController implements BooksApi {
     }
 
     @Override
-    public ResponseEntity<List<BookDTO>> findAllBooks() {
+    public ResponseEntity<List<BookDto>> findAllBooks() {
         return ResponseEntity.ok(bookService.findAll());
     }
 
     @Override
-    public ResponseEntity<BookDTO> findByIdBook(Long id) {
+    public ResponseEntity<BookDto> findByIdBook(Long id) {
         return ResponseEntity.ok(bookService.findById(id));
     }
 
     @Override
-    public ResponseEntity<Void> patchBook(BookDTO bookDTO) {
-        bookService.patch(bookDTO);
+    public ResponseEntity<Void> patchBook(BookDto bookDto) {
+        bookService.patch(bookDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
-
 
     @Override
-    public ResponseEntity<Void> updateBook(BookDTO bookDTO) {
-        bookService.update(bookDTO);
+    public ResponseEntity<Void> updateBook(BookDto bookDto) {
+        bookService.update(bookDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
-
-    @RequestMapping(value = "/take_book/{id}", method = RequestMethod.PUT)
-    public void takeBook(@PathVariable Long id){
-        bookService.takeBook(id);
+    @RequestMapping(value = "/take_book/{bookId}/{userId}", method = RequestMethod.PUT)
+    public void takeBook(@PathVariable Long  bookId, @PathVariable Long userId){
+        bookService.takeBook(bookId, userId);
     }
 
-    @RequestMapping(value = "/return_book/{id}", method = RequestMethod.PUT)
-    public void returnBook(@PathVariable Long id){
-        bookService.returnBook(id);
+    @RequestMapping(value = "/return_book/{bookId}/{userId}", method = RequestMethod.PUT)
+    public void returnBook(@PathVariable Long  bookId, @PathVariable Long userId){
+        bookService.returnBook(bookId, userId);
     }
+
 }
