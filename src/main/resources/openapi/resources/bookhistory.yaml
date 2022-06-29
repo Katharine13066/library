@@ -1,6 +1,6 @@
 get:
   tags:
-    - BookHistory Controller
+    - bookhistory
   summary: Get all books
   operationId: findAllBookHistory
   responses:
@@ -11,45 +11,45 @@ get:
           schema:
             type: array
             items:
-              $ref: '../schemas/BookHistoryDTO.yaml'
+              $ref: '../schemas/BookHistory.yaml'
 put:
   tags:
-    - BookHistory Controller
+    - bookhistory
   summary: Update bookHistory
   operationId: updateBookHistory
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/BookHistoryDTO.yaml'
+          $ref: '../schemas/BookHistory.yaml'
     required: true
   responses:
     '200':
       description: OK
 post:
   tags:
-    - BookHistory Controller
+    - bookhistory
   summary: Create new bookHistory
   operationId: createBookHistory
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/BookHistoryDTO.yaml'
+          $ref: '../schemas/BookHistory.yaml'
     required: true
   responses:
     '200':
       description: OK
 patch:
   tags:
-    - BookHistory Controller
+    - bookhistory
   summary: Patch method
   operationId: patchBookHistory
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/BookHistoryDTO.yaml'
+          $ref: '../schemas/BookHistory.yaml'
     required: true
   responses:
     '200':

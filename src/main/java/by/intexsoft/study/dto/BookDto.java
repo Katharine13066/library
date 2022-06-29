@@ -5,9 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 @Schema(description = "Book Entity")
-public class BookDTO {
-
-    @Schema(description = "ID")
+public class BookDto {
+    @Schema(description = "Id")
     private Long id;
     @Schema(description = "Book name")
     private String bookName;
@@ -18,13 +17,11 @@ public class BookDTO {
     @Schema(description = "Book status")
     private Boolean status;
     @Schema(description = "Author(s)")
-    private List<AuthorDTO> authorDTOList;
-
+    private List<AuthorDto> authorDtoList;
     @Schema(description = "BookHistory List")
-    private List<BookHistoryDTO> bookHistoryDTOList;
-
+    private List<BookHistoryDto> bookHistoryDtoList;
     @Schema(description = "Feedback List")
-    private List<FeedbackDTO> feedbackDTOList;
+    private List<FeedbackDto> feedbackDtoList;
 
     public Long getId() {
         return id;
@@ -66,27 +63,27 @@ public class BookDTO {
         this.status = status;
     }
 
-    public List<AuthorDTO> getAuthorDTOList() {
-        return authorDTOList;
+    public List<AuthorDto> getAuthorDTOList() {
+        return authorDtoList;
     }
 
-    public void setAuthorDTOList(List<AuthorDTO> authorDTOList) {
-        this.authorDTOList = authorDTOList;
+    public void setAuthorDTOList(List<AuthorDto> authorDtoList) {
+        this.authorDtoList = authorDtoList;
     }
 
-    public List<BookHistoryDTO> getBookHistoryDTOList() {
-        return bookHistoryDTOList;
+    public List<BookHistoryDto> getBookHistoryDtoList() {
+        return bookHistoryDtoList;
     }
 
-    public void setBookHistoryDTOList(List<BookHistoryDTO> bookHistoryDTOList) {
-        this.bookHistoryDTOList = bookHistoryDTOList;
+    public void setBookHistoryDtoList(List<BookHistoryDto> bookHistoryDtoList) {
+        this.bookHistoryDtoList = bookHistoryDtoList;
     }
 
-    public List<FeedbackDTO> getFeedbackDTOList() {
-        return feedbackDTOList;
+    public List<FeedbackDto> getFeedbackDtoList() {
+        return feedbackDtoList;
     }
 
-    public void setFeedbackDTOList(List<FeedbackDTO> feedbackDTOList) {
-        this.feedbackDTOList = feedbackDTOList;
+    public void setFeedbackDtoList(List<FeedbackDto> feedbackDtoList) {
+        this.feedbackDtoList = feedbackDtoList;
     }
 }

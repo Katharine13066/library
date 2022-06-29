@@ -131,6 +131,7 @@
                         <configuration>
                             <generatorName>spring</generatorName>
                             <inputSpec>${project.basedir}/src/main/resources/openapi/openapi.yaml</inputSpec>
+                            <modelNameSuffix>Dto</modelNameSuffix>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>
                                 <dateLibrary>java8</dateLibrary>

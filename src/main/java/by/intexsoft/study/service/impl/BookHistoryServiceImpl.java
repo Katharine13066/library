@@ -4,10 +4,10 @@ import by.intexsoft.study.daomodel.BookHistory;
 import by.intexsoft.study.mappers.AuthorMapper;
 import by.intexsoft.study.mappers.BookHistoryMapper;
 import by.intexsoft.study.mappers.BookMapper;
-import by.intexsoft.study.model.AuthorDTO;
-import by.intexsoft.study.model.BookDTO;
-import by.intexsoft.study.model.BookHistoryDTO;
-import by.intexsoft.study.repositories.impl.BookHistoryDAOImpl;
+import by.intexsoft.study.model.AuthorDto;
+import by.intexsoft.study.model.BookDto;
+import by.intexsoft.study.model.BookHistoryDto;
+import by.intexsoft.study.repositories.BookHistoryDao;
 import by.intexsoft.study.service.BookHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,73 +19,70 @@ import java.util.List;
 public class BookHistoryServiceImpl implements BookHistoryService {
 
     @Autowired
-    private BookHistoryDAOImpl bookHistoryDAO;
-
+    private BookHistoryDao bookHistoryDao;
     @Autowired
     private BookHistoryMapper bookHistoryMapper;
-
     @Autowired
     private BookMapper bookMapper;
-
     @Autowired
     private AuthorMapper authorMapper;
-    public BookHistoryServiceImpl(BookHistoryDAOImpl bookHistoryDAO, BookHistoryMapper bookHistoryMapper, BookMapper bookMapper, AuthorMapper authorMapper) {
-        this.bookHistoryDAO = bookHistoryDAO;
+
+    public BookHistoryServiceImpl(BookHistoryDao bookHistoryDao, BookHistoryMapper bookHistoryMapper, BookMapper bookMapper, AuthorMapper authorMapper) {
+        this.bookHistoryDao = bookHistoryDao;
         this.bookHistoryMapper = bookHistoryMapper;
         this.bookMapper = bookMapper;
         this.authorMapper = authorMapper;
     }
 
     @Override
-    public BookHistoryDTO findById(Long id) {
-        return bookHistoryMapper.toDTO(bookHistoryDAO.findById(id));
+    public BookHistoryDto findById(Long id) {
+        return bookHistoryMapper.toDto(bookHistoryDao.findById(id));
     }
 
     @Override
-    public List<BookHistoryDTO> findByIds(List<Long> list) {
-        return bookHistoryMapper.toDTOs(bookHistoryDAO.findByIds(list));
+    public List<BookHistoryDto> findByIds(List<Long> list) {
+        return bookHistoryMapper.toDtos(bookHistoryDao.findByIds(list));
     }
 
     @Override
-    public List<BookHistoryDTO> findAll() {
-        List<BookHistory> bookHistories = bookHistoryDAO.findAll();
-        return bookHistoryMapper.toDTOs(bookHistories);
+    public List<BookHistoryDto> findAll() {
+        List<BookHistory> bookHistories = bookHistoryDao.findAll();
+        return bookHistoryMapper.toDtos(bookHistories);
     }
 
     @Override
     @Transactional
     public void deleteAll() {
-        bookHistoryDAO.deleteAll();
+        bookHistoryDao.deleteAll();
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        bookHistoryDAO.deleteById(id);
+        bookHistoryDao.deleteById(id);
     }
 
     @Override
     @Transactional
-    public BookHistoryDTO create(BookHistoryDTO bookHistoryDTO) {
-        return bookHistoryMapper.toDTO(bookHistoryDAO.createEntity(bookHistoryMapper.fromDTO(bookHistoryDTO)));
+    public BookHistoryDto create(BookHistoryDto bookHistoryDto) {
+        return bookHistoryMapper.toDto(bookHistoryDao.createEntity(bookHistoryMapper.fromDto(bookHistoryDto)));
     }
 
     @Override
     @Transactional
-    public BookHistoryDTO update(BookHistoryDTO bookHistoryDTO) {
-        return bookHistoryMapper.toDTO(bookHistoryDAO.updateEntity(bookHistoryMapper.fromDTO(bookHistoryDTO)));
+    public BookHistoryDto update(BookHistoryDto bookHistoryDto) {
+        return bookHistoryMapper.toDto(bookHistoryDao.updateEntity(bookHistoryMapper.fromDto(bookHistoryDto)));
     }
 
     @Override
     @Transactional
-    public void patch(BookHistoryDTO bookHistoryDTO) {
-        BookHistory bookHistory = bookHistoryDAO.findById(bookHistoryDTO.getId());
-        bookHistoryMapper.updateFeedbackFromDto(bookHistoryDTO, bookHistory);
+    public void patch(BookHistoryDto bookHistoryDto) {
+        bookHistoryMapper.updateFeedbackFromDto(bookHistoryDto, bookHistoryDao.findById(bookHistoryDto.getId()));
     }
 
-    public BookHistoryDTO findBookHistoryByBookAndUserIds(Long book_id, Long user_id) {
-        List<BookHistoryDTO> list = bookHistoryMapper.toDTOs(bookHistoryDAO.findBookHistoryByBookAndUserIds(book_id, user_id));
-        BookHistoryDTO bookHistory = new BookHistoryDTO();
+    public BookHistoryDto findBookHistoryByBookAndUserIds(Long bookId, Long userId) {
+        List<BookHistoryDto> list = bookHistoryMapper.toDtos(bookHistoryDao.findBookHistoryByBookAndUserIds(bookId, userId));
+        BookHistoryDto bookHistory = new BookHistoryDto();
         for (int i = 0; i < list.size(); i++){
             if(list.get(i).getReturnDate().isEmpty()){
                 bookHistory = list.get(i);
@@ -95,19 +92,18 @@ public class BookHistoryServiceImpl implements BookHistoryService {
     }
 
     @Override
-    public List<BookHistoryDTO> findBookHistoryByBookId(Long book_id) {
-        List<BookHistory> bookHistories = bookHistoryDAO.findBookHistoryByBookId(book_id);
-        return bookHistoryMapper.toDTOs(bookHistories);
+    public List<BookHistoryDto> findBookHistoryByBookId(Long bookId) {
+        return bookHistoryMapper.toDtos(bookHistoryDao.findBookHistoryByBookId(bookId));
     }
 
     @Override
-    public List<BookDTO> get10TheMostPopularBooks() {
-        return bookMapper.toDTOs(bookHistoryDAO.get10TheMostPopularBooks());
+    public List<BookDto> get10TheMostPopularBooks() {
+        return bookMapper.toDtos(bookHistoryDao.get10TheMostPopularBooks());
     }
 
     @Override
-    public List<AuthorDTO> get10TheMostPopularAuthors() {
-        return authorMapper.toDTOs(bookHistoryDAO.get10TheMostPopularAuthors());
+    public List<AuthorDto> get10TheMostPopularAuthors() {
+        return authorMapper.toDtos(bookHistoryDao.get10TheMostPopularAuthors());
     }
 
 }

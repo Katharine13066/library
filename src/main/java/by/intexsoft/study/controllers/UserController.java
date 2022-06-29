@@ -1,7 +1,7 @@
 package by.intexsoft.study.controllers;
 
 import by.intexsoft.study.api.UsersApi;
-import by.intexsoft.study.model.UserDTO;
+import by.intexsoft.study.model.UserDto;
 import by.intexsoft.study.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,8 +22,8 @@ public class UserController implements UsersApi {
     }
 
     @Override
-    public ResponseEntity<Void> createUser(UserDTO userDTO) {
-        userService.create(userDTO);
+    public ResponseEntity<Void> createUser(UserDto userDto) {
+        userService.create(userDto);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -39,27 +39,26 @@ public class UserController implements UsersApi {
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
-    @Override
-    public ResponseEntity<List<UserDTO>> findAllUsers() {
+   @Override
+    public ResponseEntity<List<UserDto>> findAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
     @Override
-    public ResponseEntity<UserDTO> findByIdUser(Long id) {
+    public ResponseEntity<UserDto> findByIdUser(Long id) {
         return ResponseEntity.ok(userService.findById(id));
     }
 
     @Override
-    public ResponseEntity<Void> patchUser(UserDTO userDTO) {
-        userService.patch(userDTO);
+    public ResponseEntity<Void> patchUser(UserDto userDto) {
+        userService.patch(userDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
     @Override
-    public ResponseEntity<Void> updateUser(UserDTO userDTO) {
-        userService.update(userDTO);
+    public ResponseEntity<Void> updateUser(UserDto userDto) {
+        userService.update(userDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
-
 
 }

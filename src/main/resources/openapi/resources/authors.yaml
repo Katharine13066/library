@@ -1,6 +1,6 @@
 get:
   tags:
-    - Authors Controller
+    - authors
   summary: Get all authors
   operationId: findAllAuthors
   responses:
@@ -11,45 +11,45 @@ get:
           schema:
             type: array
             items:
-              $ref: '../schemas/AuthorDTO.yaml'
+              $ref: '../schemas/Author.yaml'
 put:
   tags:
-    - Authors Controller
+    - authors
   summary: Update author
   operationId: updateAuthor
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/AuthorDTO.yaml'
+          $ref: '../schemas/Author.yaml'
     required: true
   responses:
     '200':
       description: OK
 post:
   tags:
-    - Authors Controller
+    - authors
   summary: Create new author
   operationId: createAuthor
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/AuthorDTO.yaml'
+          $ref: '../schemas/Author.yaml'
     required: true
   responses:
     '200':
       description: OK
 patch:
   tags:
-    - Authors Controller
+    - authors
   summary: Patch method
   operationId: patchAuthor
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/AuthorDTO.yaml'
+          $ref: '../schemas/Author.yaml'
     required: true
   responses:
     '200':

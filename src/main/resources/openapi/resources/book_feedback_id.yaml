@@ -1,10 +1,15 @@
 get:
   tags:
     - feedback
-  summary: Get feedback by id
-  operationId: findByIdFeedback
+  summary: Get feedback by book id
+  operationId: getFeedbacksByBookId
   parameters:
-    - $ref:  '../parameters/id.yaml'
+    - name: bookId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
   responses:
     '200':
       description: OK

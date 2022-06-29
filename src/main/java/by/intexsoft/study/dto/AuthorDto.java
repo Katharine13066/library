@@ -5,8 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
 @Schema(description = "Author Entity")
-public class AuthorDTO {
-    @Schema(description = "ID")
+public class AuthorDto {
+    @Schema(description = "Id")
     private Long id;
     @Schema(description = "Author name")
     private String authorName;
@@ -17,7 +17,7 @@ public class AuthorDTO {
     @Schema(description = "Age")
     private Integer age;
     @Schema(description = "Book(s)")
-    private List<BookDTO> bookDTOList;
+    private List<BookDto> bookDtoList;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class AuthorDTO {
         this.age = age;
     }
 
-    public List<BookDTO> getBookDTOList() {
-        return bookDTOList;
+    public List<BookDto> getBookDtoList() {
+        return bookDtoList;
     }
 
-    public void setBookDTOList(List<BookDTO> bookDTOList) {
-        this.bookDTOList = bookDTOList;
+    public void setBookDtoList(List<BookDto> bookDtoList) {
+        this.bookDtoList = bookDtoList;
     }
 }

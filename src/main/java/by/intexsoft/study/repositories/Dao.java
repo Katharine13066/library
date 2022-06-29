@@ -2,7 +2,7 @@ package by.intexsoft.study.repositories;
 
 import java.util.List;
 
-public interface DAO<T>{
+public interface Dao<T>{
 
     T createEntity(T t);
     T findById(Long id);

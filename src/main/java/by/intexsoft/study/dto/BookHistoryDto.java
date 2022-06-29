@@ -3,20 +3,19 @@ package by.intexsoft.study.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "BookHistory Entity")
-public class BookHistoryDTO {
-
-    @Schema(description = "ID")
+public class BookHistoryDto {
+    @Schema(description = "Id")
     private Long id;
-    @Schema(description = "User ID")
-    private Long userID;
-    @Schema(description = "Book ID")
-    private Long bookID;
+    @Schema(description = "User Id")
+    private Long userId;
+    @Schema(description = "Book Id")
+    private Long bookId;
     @Schema(description = "Start Date")
     private String startDate;
     @Schema(description = "Return Date")
     private String returnDate;
     @Schema(description = "Book")
-    private BookDTO books;
+    private BookDto book;
 
     public Long getId() {
         return id;
@@ -26,20 +25,20 @@ public class BookHistoryDTO {
         this.id = id;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getBookID() {
-        return bookID;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBookID(Long bookID) {
-        this.bookID = bookID;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
     public String getStartDate() {
@@ -58,12 +57,11 @@ public class BookHistoryDTO {
         this.returnDate = returnDate;
     }
 
-    public BookDTO getBooks() {
-        return books;
+    public BookDto getBook() {
+        return book;
     }
 
-    public void setBooks(BookDTO books) {
-        this.books = books;
+    public void setBook(BookDto book) {
+        this.book = book;
     }
-
 }

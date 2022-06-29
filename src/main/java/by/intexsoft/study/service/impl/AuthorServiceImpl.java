@@ -1,9 +1,8 @@
 package by.intexsoft.study.service.impl;
 
-import by.intexsoft.study.daomodel.Author;
 import by.intexsoft.study.mappers.AuthorMapper;
-import by.intexsoft.study.model.AuthorDTO;
-import by.intexsoft.study.repositories.AuthorDAO;
+import by.intexsoft.study.model.AuthorDto;
+import by.intexsoft.study.repositories.AuthorDao;
 import by.intexsoft.study.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,63 +14,58 @@ import java.util.List;
 public class AuthorServiceImpl implements AuthorService {
 
     @Autowired
-    private AuthorDAO authorDAO;
-
+    private AuthorDao authorDao;
     @Autowired
     private AuthorMapper authorMapper;
 
-
-    public AuthorServiceImpl(AuthorDAO authorDAO, AuthorMapper authorMapper) {
-        this.authorDAO = authorDAO;
+    public AuthorServiceImpl(AuthorDao authorDao, AuthorMapper authorMapper) {
+        this.authorDao = authorDao;
         this.authorMapper = authorMapper;
     }
 
     @Override
-    public AuthorDTO findById(Long id) {
-        return authorMapper.toDTO(authorDAO.findById(id));
+    public AuthorDto findById(Long id) {
+        return authorMapper.toDto(authorDao.findById(id));
     }
 
     @Override
-    public List<AuthorDTO> findByIds(List<Long> list) {
-        return authorMapper.toDTOs(authorDAO.findByIds(list));
+    public List<AuthorDto> findByIds(List<Long> list) {
+        return authorMapper.toDtos(authorDao.findByIds(list));
     }
 
     @Override
-    public List<AuthorDTO> findAll() {
-        List<Author> authors = authorDAO.findAll();
-        return authorMapper.toDTOs(authors);
+    public List<AuthorDto> findAll() {
+        return authorMapper.toDtos(authorDao.findAll());
     }
 
     @Override
     @Transactional
     public void deleteAll() {
-        authorDAO.deleteAll();
+        authorDao.deleteAll();
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        authorDAO.deleteById(id);
+        authorDao.deleteById(id);
     }
 
     @Override
     @Transactional
-    public AuthorDTO create(AuthorDTO authorDTO) {
-      return authorMapper.toDTO(authorDAO.createEntity(authorMapper.fromDTO(authorDTO)));
+    public AuthorDto create(AuthorDto authorDto) {
+      return authorMapper.toDto(authorDao.createEntity(authorMapper.fromDto(authorDto)));
     }
 
     @Override
     @Transactional
-    public AuthorDTO update(AuthorDTO authorDTO) {
-        return authorMapper.toDTO(authorDAO.updateEntity(authorMapper.fromDTO(authorDTO)));
+    public AuthorDto update(AuthorDto authorDto) {
+        return authorMapper.toDto(authorDao.updateEntity(authorMapper.fromDto(authorDto)));
     }
-
 
     @Override
     @Transactional
-    public void patch(AuthorDTO authorDTO) {
-        Author author = authorDAO.findById(authorDTO.getId());
-        authorMapper.updateAuthorFromDto(authorDTO, author);
+    public void patch(AuthorDto authorDto) {
+        authorMapper.updateAuthorFromDto(authorDto, authorDao.findById(authorDto.getId()));
     }
 
 }

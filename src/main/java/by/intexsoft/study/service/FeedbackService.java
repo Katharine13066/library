@@ -1,10 +1,10 @@
 package by.intexsoft.study.service;
 
-import by.intexsoft.study.model.FeedbackDTO;
+import by.intexsoft.study.model.FeedbackDto;
 
 import java.util.List;
 
-public interface FeedbackService extends LibraryService<FeedbackDTO>{
+public interface FeedbackService extends LibraryService<FeedbackDto>{
 
-    List<FeedbackDTO> getFeedbacksByBookId(Long book_id);
+    List<FeedbackDto> getFeedbacksByBookId(Long bookId);
 }

@@ -1,6 +1,6 @@
 get:
   tags:
-    - Users Controller
+    - users
   summary: Get user by id
   operationId: findByIdUser
   parameters:
@@ -11,4 +11,4 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../schemas/UserDTO.yaml'
+            $ref: '../schemas/User.yaml'

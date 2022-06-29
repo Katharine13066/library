@@ -5,13 +5,11 @@ required:
   - publisher
   - publicationDate
   - status
-  - authorDTOList
-  - bookhistories
-  - feedbacks
+  - authorDtoList
 properties:
   id:
     type: integer
-    description: ID
+    description: Id
     format: int64
   bookName:
     type: string
@@ -25,18 +23,8 @@ properties:
   status:
     type: boolean
     description: Book status
-  authorDTOList:
+  authorDtoList:
     type: array
     description: Author(s)
     items:
-      $ref: './AuthorDTO.yaml'
-  bookhistories:
-    type: array
-    description: BookHistory List
-    items:
-      $ref: './BookHistoryDTO.yaml'
-  feedbacks:
-    type: array
-    description: Feedback(s)
-    items:
-      $ref: './FeedbackDTO.yaml'
+      $ref: './Author.yaml'

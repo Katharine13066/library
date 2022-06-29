@@ -1,6 +1,6 @@
 delete:
   tags:
-    - Users Controller
+    - users
   summary: Delete all users
   operationId: deleteAllUsers
   responses:

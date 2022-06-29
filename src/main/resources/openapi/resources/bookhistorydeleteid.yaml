@@ -1,6 +1,6 @@
 delete:
   tags:
-    - BookHistory Controller
+    - bookhistory
   summary: Delete bookHistory by id
   operationId: deleteBookHistoryById
   parameters:

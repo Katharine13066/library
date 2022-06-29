@@ -1,7 +1,7 @@
 package by.intexsoft.study.controllers;
 
 import by.intexsoft.study.api.FeedbackApi;
-import by.intexsoft.study.model.FeedbackDTO;
+import by.intexsoft.study.model.FeedbackDto;
 import by.intexsoft.study.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,8 +25,8 @@ public class FeedbackController implements FeedbackApi {
     }
 
     @Override
-    public ResponseEntity<Void> createFeedback(FeedbackDTO feedbackDTO) {
-        feedbackService.create(feedbackDTO);
+    public ResponseEntity<Void> createFeedback(FeedbackDto feedbackDto) {
+        feedbackService.create(feedbackDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
@@ -43,29 +43,29 @@ public class FeedbackController implements FeedbackApi {
     }
 
     @Override
-    public ResponseEntity<List<FeedbackDTO>> findAllFeedbacks() {
+    public ResponseEntity<List<FeedbackDto>> findAllFeedbacks() {
         return ResponseEntity.ok(feedbackService.findAll());
     }
 
     @Override
-    public ResponseEntity<FeedbackDTO> findByIdFeedback(Long id) {
+    public ResponseEntity<FeedbackDto> findByIdFeedback(Long id) {
         return ResponseEntity.ok(feedbackService.findById(id));
     }
 
     @Override
-    public ResponseEntity<Void> patchFeedback(FeedbackDTO feedbackDTO) {
-        feedbackService.patch(feedbackDTO);
+    public ResponseEntity<Void> patchFeedback(FeedbackDto feedbackDto) {
+        feedbackService.patch(feedbackDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
     @Override
-    public ResponseEntity<Void> updateFeedback(FeedbackDTO feedbackDTO) {
-        feedbackService.update(feedbackDTO);
+    public ResponseEntity<Void> updateFeedback(FeedbackDto feedbackDto) {
+        feedbackService.update(feedbackDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
-    @RequestMapping(value = "/book_feedback/{book_id}", method = RequestMethod.GET)
-    public List<FeedbackDTO> getFeedbacksByBookId(@PathVariable Long book_id){
-         return feedbackService.getFeedbacksByBookId(book_id);
+    @RequestMapping(value = "/book_feedback/{bookId}", method = RequestMethod.GET)
+    public List<FeedbackDto> getFeedbacksByBookId(@PathVariable Long bookId){
+         return feedbackService.getFeedbacksByBookId(bookId);
     }
 }

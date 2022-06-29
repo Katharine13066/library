@@ -5,11 +5,10 @@ required:
   - phoneNumber
   - email
   - age
-  - bookDTOList
 properties:
   id:
     type: integer
-    description: ID
+    description: Id
     format: int64
   authorName:
     type: string
@@ -24,8 +23,3 @@ properties:
     type: integer
     description: Age
     format: int32
-  bookDTOList:
-    type: array
-    description: Book(s)
-    items:
-      $ref: './BookDTO.yaml'

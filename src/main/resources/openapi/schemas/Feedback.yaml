@@ -1,21 +1,21 @@
 type: object
 required:
   - id
-  - userID
-  - bookID
+  - userId
+  - bookId
   - comments
 properties:
   id:
     type: integer
-    description: ID
+    description: Id
     format: int64
-  userID:
+  userId:
     type: integer
-    description: User ID
+    description: User Id
     format: int64
-  bookID:
+  bookId:
     type: integer
-    description: Book ID
+    description: Book Id
     format: int64
   comments:
     type: string

@@ -1,6 +1,6 @@
 package by.intexsoft.study.repositories.impl;
 
-import by.intexsoft.study.repositories.DAO;
+import by.intexsoft.study.repositories.Dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -11,13 +11,13 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DAOImpl<T> implements DAO<T> {
+public abstract class DaoImpl<T> implements Dao<T> {
 
     private EntityManager entityManager;
 
     private Class<T> clazz;
 
-    public DAOImpl(EntityManager entityManager, Class clazz) {
+    public DaoImpl(EntityManager entityManager, Class clazz) {
         this.entityManager = entityManager;
         this.clazz = clazz;
     }
@@ -62,11 +62,11 @@ public abstract class DAOImpl<T> implements DAO<T> {
     }
 
     @Override
-    public void deleteById(Long ident) {
+    public void deleteById(Long id) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaDelete<T> criteriaDelete = criteriaBuilder.createCriteriaDelete(clazz);
         Root<T> root = criteriaDelete.from(clazz);
-        criteriaDelete.where(criteriaBuilder.equal(root.get("id"), ident));
+        criteriaDelete.where(criteriaBuilder.equal(root.get("id"), id));
         Query query = entityManager.createQuery(criteriaDelete);
         query.executeUpdate();
     }
@@ -74,9 +74,9 @@ public abstract class DAOImpl<T> implements DAO<T> {
     @Override
     public void deleteAll() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaDelete<T> delete = criteriaBuilder.createCriteriaDelete(clazz);
-        delete.from(clazz);
-        Query query = entityManager.createQuery(delete);
+        CriteriaDelete<T> criteriaDelete = criteriaBuilder.createCriteriaDelete(clazz);
+        criteriaDelete.from(clazz);
+        Query query = entityManager.createQuery(criteriaDelete);
         query.executeUpdate();
     }
 
@@ -84,13 +84,10 @@ public abstract class DAOImpl<T> implements DAO<T> {
     public List<T> findAll() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(clazz);
-        Root<T> rootEntry = criteriaQuery.from(clazz);
-        CriteriaQuery<T> all = criteriaQuery.select(rootEntry);
-        criteriaQuery.select(rootEntry);
+        Root<T> root = criteriaQuery.from(clazz);
+        criteriaQuery.select(root);
         Query query = entityManager.createQuery(criteriaQuery);
-        List<T> result = query.getResultList();
-        return  result;
+        return  query.getResultList();
     }
-
 
 }

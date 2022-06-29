@@ -18,19 +18,14 @@ public class Author implements Serializable {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "author_name", nullable = false)
     private String authorName;
-
     @Column(name = "phone_number")
     private String phoneNumber;
-
     @Column(name = "email", unique = true)
     private String email;
-
     @Column(name = "age")
     private Integer age;
-
     @ManyToMany
     @JoinTable(name="book_author",
             joinColumns = @JoinColumn(name="author_id"),
@@ -102,5 +97,4 @@ public class Author implements Serializable {
     public void setAge(Integer age) {
         this.age = age;
     }
-
 }

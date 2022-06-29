@@ -1,7 +1,7 @@
 package by.intexsoft.study.controllers;
 
 import by.intexsoft.study.api.AuthorsApi;
-import by.intexsoft.study.model.AuthorDTO;
+import by.intexsoft.study.model.AuthorDto;
 import by.intexsoft.study.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 public class AuthorController implements AuthorsApi {
-
     private AuthorService authorService;
 
     @Autowired
@@ -22,8 +21,8 @@ public class AuthorController implements AuthorsApi {
     }
 
     @Override
-    public ResponseEntity<Void> createAuthor(AuthorDTO authorDTO) {
-        authorService.create(authorDTO);
+    public ResponseEntity<Void> createAuthor(AuthorDto authorDto) {
+        authorService.create(authorDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
@@ -40,27 +39,25 @@ public class AuthorController implements AuthorsApi {
     }
 
     @Override
-    public ResponseEntity<List<AuthorDTO>> findAllAuthors() {
+    public ResponseEntity<List<AuthorDto>> findAllAuthors() {
         return ResponseEntity.ok(authorService.findAll());
     }
 
     @Override
-    public ResponseEntity<AuthorDTO> findByIdAuthor(Long id) {
+    public ResponseEntity<AuthorDto> findByIdAuthor(Long id) {
         return ResponseEntity.ok(authorService.findById(id));
     }
 
     @Override
-    public ResponseEntity<Void> patchAuthor(AuthorDTO authorDTO) {
-        authorService.patch(authorDTO);
+    public ResponseEntity<Void> patchAuthor(AuthorDto authorDto) {
+        authorService.patch(authorDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
     @Override
-    public ResponseEntity<Void> updateAuthor(AuthorDTO authorDTO) {
-        authorService.update(authorDTO);
+    public ResponseEntity<Void> updateAuthor(AuthorDto authorDto) {
+        authorService.update(authorDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
-
-
 
 }

@@ -1,6 +1,6 @@
 get:
   tags:
-    - Users Controller
+    - users
   summary: Get all users
   operationId: findAllUsers
   responses:
@@ -11,45 +11,45 @@ get:
           schema:
             type: array
             items:
-              $ref: '../schemas/UserDTO.yaml'
+              $ref: '../schemas/User.yaml'
 put:
   tags:
-    - Users Controller
+    - users
   summary: Update user
   operationId: updateUser
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/UserDTO.yaml'
+          $ref: '../schemas/User.yaml'
     required: true
   responses:
     '200':
       description: OK
 post:
   tags:
-    - Users Controller
+    - users
   summary: Create new user
   operationId: createUser
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/UserDTO.yaml'
+          $ref: '../schemas/User.yaml'
     required: true
   responses:
     '200':
       description: OK
 patch:
   tags:
-    - Users Controller
+    - users
   summary: Patch method
   operationId: patchUser
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/UserDTO.yaml'
+          $ref: '../schemas/User.yaml'
     required: true
   responses:
     '200':

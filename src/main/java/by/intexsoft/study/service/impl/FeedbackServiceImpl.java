@@ -2,8 +2,8 @@ package by.intexsoft.study.service.impl;
 
 import by.intexsoft.study.daomodel.Feedback;
 import by.intexsoft.study.mappers.FeedbackMapper;
-import by.intexsoft.study.model.FeedbackDTO;
-import by.intexsoft.study.repositories.FeedbackDAO;
+import by.intexsoft.study.model.FeedbackDto;
+import by.intexsoft.study.repositories.FeedbackDao;
 import by.intexsoft.study.service.FeedbackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,69 +15,66 @@ import java.util.List;
 public class FeedbackServiceImpl implements FeedbackService {
 
     @Autowired
-    private FeedbackDAO feedbackDAO;
+    private FeedbackDao feedbackDao;
 
     @Autowired
     private FeedbackMapper feedbackMapper;
 
-
-    public FeedbackServiceImpl(FeedbackDAO feedbackDAO, FeedbackMapper feedbackMapper) {
-        this.feedbackDAO = feedbackDAO;
+    public FeedbackServiceImpl(FeedbackDao feedbackDao, FeedbackMapper feedbackMapper) {
+        this.feedbackDao = feedbackDao;
         this.feedbackMapper = feedbackMapper;
     }
 
-
     @Override
-    public FeedbackDTO findById(Long id) {
-        return feedbackMapper.toDTO(feedbackDAO.findById(id));
+    public FeedbackDto findById(Long id) {
+        return feedbackMapper.toDto(feedbackDao.findById(id));
     }
 
     @Override
-    public List<FeedbackDTO> findByIds(List<Long> list) {
-        return feedbackMapper.toDTOs(feedbackDAO.findByIds(list));
+    public List<FeedbackDto> findByIds(List<Long> list) {
+        return feedbackMapper.toDtos(feedbackDao.findByIds(list));
     }
 
     @Override
-    public List<FeedbackDTO> findAll() {
-        List<Feedback> feedbacks = feedbackDAO.findAll();
-        return feedbackMapper.toDTOs(feedbacks);
+    public List<FeedbackDto> findAll() {
+        List<Feedback> feedbacks = feedbackDao.findAll();
+        return feedbackMapper.toDtos(feedbacks);
     }
 
     @Override
     @Transactional
     public void deleteAll() {
-        feedbackDAO.deleteAll();
+        feedbackDao.deleteAll();
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        feedbackDAO.deleteById(id);
+        feedbackDao.deleteById(id);
     }
 
     @Override
     @Transactional
-    public FeedbackDTO create(FeedbackDTO feedbackDTO) {
-        return feedbackMapper.toDTO(feedbackDAO.createEntity(feedbackMapper.fromDTO(feedbackDTO)));
+    public FeedbackDto create(FeedbackDto feedbackDto) {
+        return feedbackMapper.toDto(feedbackDao.createEntity(feedbackMapper.fromDto(feedbackDto)));
     }
 
     @Override
     @Transactional
-    public FeedbackDTO update(FeedbackDTO feedbackDTO) {
-        return feedbackMapper.toDTO(feedbackDAO.updateEntity(feedbackMapper.fromDTO(feedbackDTO)));
+    public FeedbackDto update(FeedbackDto feedbackDto) {
+        return feedbackMapper.toDto(feedbackDao.updateEntity(feedbackMapper.fromDto(feedbackDto)));
     }
 
     @Override
     @Transactional
-    public void patch(FeedbackDTO feedbackDTO) {
-        Feedback feedback = feedbackDAO.findById(feedbackDTO.getId());
-        feedbackMapper.updateFeedbackFromDto(feedbackDTO, feedback);
+    public void patch(FeedbackDto feedbackDto) {
+        feedbackMapper.updateFeedbackFromDto(feedbackDto, feedbackDao.findById(feedbackDto.getId()));
 
     }
 
     @Override
-    public List<FeedbackDTO> getFeedbacksByBookId(Long book_id) {
-        List<Feedback> feedbacks = feedbackDAO.findFeedbacksByBookId(book_id);
-        return feedbackMapper.toDTOs(feedbacks);
+    public List<FeedbackDto> getFeedbacksByBookId(Long bookId) {
+        return feedbackMapper.toDtos(feedbackDao.findFeedbacksByBookId(bookId));
     }
+
 }

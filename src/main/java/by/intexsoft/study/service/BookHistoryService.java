@@ -1,15 +1,15 @@
 package by.intexsoft.study.service;
 
-import by.intexsoft.study.model.AuthorDTO;
-import by.intexsoft.study.model.BookDTO;
-import by.intexsoft.study.model.BookHistoryDTO;
+import by.intexsoft.study.model.AuthorDto;
+import by.intexsoft.study.model.BookDto;
+import by.intexsoft.study.model.BookHistoryDto;
 
 import java.util.List;
 
-public interface BookHistoryService extends LibraryService<BookHistoryDTO> {
+public interface BookHistoryService extends LibraryService<BookHistoryDto> {
 
-    BookHistoryDTO findBookHistoryByBookAndUserIds(Long book_id, Long user_id);
-    List<BookHistoryDTO> findBookHistoryByBookId(Long book_id);
-    List<BookDTO> get10TheMostPopularBooks();
-    List<AuthorDTO> get10TheMostPopularAuthors();
+    BookHistoryDto findBookHistoryByBookAndUserIds(Long bookId, Long userId);
+    List<BookHistoryDto> findBookHistoryByBookId(Long bookId);
+    List<BookDto> get10TheMostPopularBooks();
+    List<AuthorDto> get10TheMostPopularAuthors();
 }

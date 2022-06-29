@@ -13,50 +13,49 @@ import java.io.Serializable;
 @Entity
 @Table(name="bookhistory")
 public class BookHistory implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "book_id", nullable = false, insertable = false, updatable = false)
-    private Long bookID;
-
+    private Long bookId;
     @Column(name = "user_id", nullable = false, insertable = false, updatable = false)
-    private Long userID;
-
+    private Long userId;
     @Column(name = "start_date", nullable = false)
     private String startDate;
-
     @Column(name = "return_date", nullable = false)
     private String returnDate;
-
     @ManyToOne
     @JoinColumn(name = "book_id", referencedColumnName = "id")
-    private Book books;
+    private Book book;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
-    public BookHistory(Long id, Long bookID, Long userID, String startDate, String returnDate, Book books) {
+    public BookHistory(Long id, Long bookId, Long userId, String startDate, String returnDate, Book book, User user) {
         this.id = id;
-        this.bookID = bookID;
-        this.userID = userID;
+        this.bookId = bookId;
+        this.userId = userId;
         this.startDate = startDate;
         this.returnDate = returnDate;
-        this.books = books;
+        this.book = book;
+        this.user = user;
     }
 
-    public BookHistory(Long bookID, Long userID, String startDate, String returnDate, Book books) {
-        this.bookID = bookID;
-        this.userID = userID;
+    public BookHistory(Long bookId, Long userId, String startDate, String returnDate, Book book, User user) {
+        this.bookId = bookId;
+        this.userId = userId;
         this.startDate = startDate;
         this.returnDate = returnDate;
-        this.books = books;
+        this.book = book;
+        this.user = user;
     }
 
-    public Book getBooks() {
-        return books;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBooks(Book books) {
-        this.books = books;
+    public void setBook(Book books) {
+        this.book = books;
     }
 
     public BookHistory(){}
@@ -69,20 +68,20 @@ public class BookHistory implements Serializable {
         this.id = id;
     }
 
-    public Long getBookID() {
-        return bookID;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setBookID(Long bookID) {
-        this.bookID = bookID;
+    public void setBookId(Long bookID) {
+        this.bookId = bookID;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserId(Long userID) {
+        this.userId = userID;
     }
 
     public String getStartDate() {
@@ -99,5 +98,13 @@ public class BookHistory implements Serializable {
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

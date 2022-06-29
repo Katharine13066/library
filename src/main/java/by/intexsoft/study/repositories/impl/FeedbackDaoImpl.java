@@ -1,7 +1,7 @@
 package by.intexsoft.study.repositories.impl;
 
 import by.intexsoft.study.daomodel.Feedback;
-import by.intexsoft.study.repositories.FeedbackDAO;
+import by.intexsoft.study.repositories.FeedbackDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,21 +13,20 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
-public class FeedbackDAOImpl extends DAOImpl<Feedback> implements FeedbackDAO {
+public class FeedbackDaoImpl extends DaoImpl<Feedback> implements FeedbackDao {
 
     @Autowired
-    public FeedbackDAOImpl(EntityManager entityManager) {
+    public FeedbackDaoImpl(EntityManager entityManager) {
         super(entityManager, Feedback.class);
     }
 
-
     @Override
-    public List<Feedback> findFeedbacksByBookId(Long book_id) {
+    public List<Feedback> findFeedbacksByBookId(Long bookId) {
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<Feedback> query = criteriaBuilder.createQuery(Feedback.class);
-        Root<Feedback> from = query.from(Feedback.class);
-        query.select(from).where(criteriaBuilder.equal(from.get("bookID"), book_id));
-        TypedQuery<Feedback> typedQuery = getEntityManager().createQuery(query);
+        CriteriaQuery<Feedback> criteriaQuery = criteriaBuilder.createQuery(Feedback.class);
+        Root<Feedback> root = criteriaQuery.from(Feedback.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("bookId"), bookId));
+        TypedQuery<Feedback> typedQuery = getEntityManager().createQuery(criteriaQuery);
         List<Feedback> result = typedQuery.getResultList();
         return result;
     }

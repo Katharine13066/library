@@ -1,7 +1,7 @@
 package by.intexsoft.study.mappers;
 
 import by.intexsoft.study.daomodel.Book;
-import by.intexsoft.study.model.BookDTO;
+import by.intexsoft.study.model.BookDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -18,17 +18,15 @@ public interface BookMapper {
 
     BookMapper bookMapper = Mappers.getMapper(BookMapper.class);
 
-    @Mapping(source = "authors", target = "authorDTOList")
-    @Mapping(source = "bookHistoryList", target = "bookhistories")
-    @Mapping(source = "feedbacks", target = "feedbacks")
-    BookDTO toDTO(Book book);
+    BookDto toDto(Book book);
 
-    List<BookDTO> toDTOs(List<Book> authors);
+    List<BookDto> toDtos(List<Book> authors);
 
     @InheritInverseConfiguration
-    Book fromDTO(BookDTO bookDTO);
+    Book fromDto(BookDto bookDto);
 
     @InheritConfiguration
     @Mapping(target = "id", ignore = true)
-    void updateBookFromDto(BookDTO bookDTO, @MappingTarget Book book);
+    void updateBookFromDto(BookDto bookDto, @MappingTarget Book book);
+
 }

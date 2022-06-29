@@ -1,6 +1,6 @@
 delete:
   tags:
-    - Users Controller
+    - users
   summary: Delete user by id
   operationId: deleteUserById
   parameters:

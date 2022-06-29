@@ -1,7 +1,7 @@
 package by.intexsoft.study.mappers;
 
 import by.intexsoft.study.daomodel.User;
-import by.intexsoft.study.model.UserDTO;
+import by.intexsoft.study.model.UserDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -17,13 +17,16 @@ import java.util.List;
 public interface UserMapper {
 
     UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-    UserDTO toDTO(User user);
-    @InheritInverseConfiguration
 
-    User fromDTO(UserDTO userDTO);
-    List<UserDTO> toDTOs(List<User> users);
+    UserDto toDto(User user);
+
+    @InheritInverseConfiguration
+    User fromDto(UserDto userDto);
+
+    List<UserDto> toDtos(List<User> users);
 
     @InheritConfiguration
     @Mapping(target = "id", ignore = true)
-    void updateUserFromDto(UserDTO userDTO, @MappingTarget User user);
+    void updateUserFromDto(UserDto userDto, @MappingTarget User user);
+
 }

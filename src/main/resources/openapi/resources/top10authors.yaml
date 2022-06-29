@@ -1,6 +1,6 @@
 get:
   tags:
-    - BookHistory Controller
+    - bookhistory
   summary: Get top 10 authors
   operationId: get10TheMostPopularAuthors
   responses:
@@ -11,4 +11,4 @@ get:
           schema:
             type: array
             items:
-              $ref: '../schemas/AuthorDTO.yaml'
+              $ref: '../schemas/Author.yaml'

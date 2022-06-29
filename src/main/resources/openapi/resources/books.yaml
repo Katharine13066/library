@@ -1,6 +1,6 @@
 get:
   tags:
-    - Books Controller
+    - books
   summary: Get all books
   operationId: findAllBooks
   responses:
@@ -11,45 +11,45 @@ get:
           schema:
             type: array
             items:
-              $ref: '../schemas/BookDTO.yaml'
+              $ref: '../schemas/Book.yaml'
 put:
   tags:
-    - Books Controller
+    - books
   summary: Update book
   operationId: updateBook
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/BookDTO.yaml'
+          $ref: '../schemas/Book.yaml'
     required: true
   responses:
     '200':
       description: OK
 post:
   tags:
-    - Books Controller
+    - books
   summary: Create new book
   operationId: createBook
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/BookDTO.yaml'
+          $ref: '../schemas/Book.yaml'
     required: true
   responses:
     '200':
       description: OK
 patch:
   tags:
-    - Books Controller
+    - books
   summary: Patch method
   operationId: patchBook
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/BookDTO.yaml'
+          $ref: '../schemas/Book.yaml'
     required: true
   responses:
     '200':

@@ -1,10 +1,15 @@
 get:
   tags:
     - bookhistory
-  summary: Get bookHistory by id
-  operationId: findByIdBookHistory
+  summary: Get bookHistory by book id
+  operationId: getBookHistoryByBookId
   parameters:
-    - $ref:  '../parameters/id.yaml'
+    - name: bookId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
   responses:
     '200':
       description: OK

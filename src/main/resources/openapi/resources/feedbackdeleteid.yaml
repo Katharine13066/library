@@ -1,6 +1,6 @@
 delete:
   tags:
-    - Feedback Controller
+    - feedback
   summary: Delete feedback by id
   operationId: deleteFeedbackById
   parameters:

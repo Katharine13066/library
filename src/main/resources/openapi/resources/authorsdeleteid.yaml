@@ -1,6 +1,6 @@
 delete:
   tags:
-    - Authors Controller
+    - authors
   summary: Delete author by id
   operationId: deleteAuthorById
   parameters:

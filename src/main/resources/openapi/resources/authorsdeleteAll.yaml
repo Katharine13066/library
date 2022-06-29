@@ -1,6 +1,6 @@
 delete:
   tags:
-    - Authors Controller
+    - authors
   summary: Delete all authors
   operationId: deleteAllAuthors
   responses:

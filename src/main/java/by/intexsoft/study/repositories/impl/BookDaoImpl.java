@@ -1,6 +1,6 @@
 package by.intexsoft.study.repositories.impl;
 
-import by.intexsoft.study.repositories.BookDAO;
+import by.intexsoft.study.repositories.BookDao;
 import by.intexsoft.study.daomodel.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 
 @Repository
-public class BookDAOImpl extends DAOImpl<Book> implements BookDAO {
+public class BookDaoImpl extends DaoImpl<Book> implements BookDao {
 
     @Autowired
-    public BookDAOImpl(EntityManager entityManager) {
+    public BookDaoImpl(EntityManager entityManager) {
         super(entityManager, Book.class);
     }
 

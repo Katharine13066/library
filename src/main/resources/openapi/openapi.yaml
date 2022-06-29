@@ -53,15 +53,23 @@ paths:
     $ref: './resources/top10books.yaml'
   /top10authors:
     $ref: './resources/top10authors.yaml'
+  /book_feedback/{id}:
+    $ref: './resources/book_feedback_id.yaml'
+  /book_history/{id}:
+    $ref: './resources/book_history_id.yaml'
+  /take_book/{bookId}/{userId}:
+    $ref: './resources/take_book.yaml'
+  /return_book/{bookId}/{userId}:
+    $ref: './resources/return_book.yaml'
 components:
   schemas:
     AuthorDTO:
-      $ref: './schemas/AuthorDTO.yaml'
+      $ref: './schemas/Author.yaml'
     BookDTO:
-      $ref: './schemas/BookDTO.yaml'
+      $ref: './schemas/Book.yaml'
     UserDTO:
-      $ref: './schemas/UserDTO.yaml'
+      $ref: './schemas/User.yaml'
     FeedbackDTO:
-      $ref: './schemas/FeedbackDTO.yaml'
+      $ref: './schemas/Feedback.yaml'
     BookHistoryDTO:
-      $ref: './schemas/BookHistoryDTO.yaml'
+      $ref: './schemas/BookHistory.yaml'

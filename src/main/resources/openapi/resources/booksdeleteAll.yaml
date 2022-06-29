@@ -1,6 +1,6 @@
 delete:
   tags:
-    - Books Controller
+    - books
   summary: Delete all books
   operationId: deleteAllBooks
   responses:

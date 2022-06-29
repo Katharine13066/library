@@ -1,17 +1,16 @@
 package by.intexsoft.study.repositories.impl;
 
 import by.intexsoft.study.daomodel.User;
-import by.intexsoft.study.repositories.UserDAO;
+import by.intexsoft.study.repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 
 @Repository
-public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
+public class UserDaoImpl extends DaoImpl<User> implements UserDao {
 
     @Autowired
-    public UserDAOImpl(EntityManager entityManager) {
+    public UserDaoImpl(EntityManager entityManager) {
         super(entityManager, User.class);
     }
 }

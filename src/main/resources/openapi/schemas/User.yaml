@@ -9,7 +9,7 @@ required:
 properties:
   id:
     type: integer
-    description: ID
+    description: Id
     format: int64
   userName:
     type: string

@@ -1,6 +1,6 @@
 delete:
   tags:
-    - BookHistory Controller
+    - bookhistory
   summary: Delete all bookHistory
   operationId: deleteAllBookHistory
   responses:

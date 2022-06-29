@@ -1,6 +1,6 @@
 get:
   tags:
-    - Feedback Controller
+    - feedback
   summary: Get all feedbacks
   operationId: findAllFeedbacks
   responses:
@@ -11,45 +11,45 @@ get:
           schema:
             type: array
             items:
-              $ref: '../schemas/FeedbackDTO.yaml'
+              $ref: '../schemas/Feedback.yaml'
 put:
   tags:
-    - Feedback Controller
+    - feedback
   summary: Update feedback
   operationId: updateFeedback
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/FeedbackDTO.yaml'
+          $ref: '../schemas/Feedback.yaml'
     required: true
   responses:
     '200':
       description: OK
 post:
   tags:
-    - Feedback Controller
+    - feedback
   summary: Create new feedback
   operationId: createFeedback
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/FeedbackDTO.yaml'
+          $ref: '../schemas/Feedback.yaml'
     required: true
   responses:
     '200':
       description: OK
 patch:
   tags:
-    - Feedback Controller
+    - feedback
   summary: Patch method
   operationId: patchFeedback
   requestBody:
     content:
       application/json:
         schema:
-          $ref: '../schemas/FeedbackDTO.yaml'
+          $ref: '../schemas/Feedback.yaml'
     required: true
   responses:
     '200':

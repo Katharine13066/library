@@ -1,6 +1,6 @@
 delete:
   tags:
-    - Books Controller
+    - books
   summary: Delete book by id
   operationId: deleteBookById
   parameters:

@@ -1,9 +1,9 @@
 package by.intexsoft.study.controllers;
 
 import by.intexsoft.study.api.BookhistoryApi;
-import by.intexsoft.study.model.AuthorDTO;
-import by.intexsoft.study.model.BookDTO;
-import by.intexsoft.study.model.BookHistoryDTO;
+import by.intexsoft.study.model.AuthorDto;
+import by.intexsoft.study.model.BookDto;
+import by.intexsoft.study.model.BookHistoryDto;
 import by.intexsoft.study.service.BookHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,10 +26,9 @@ public class BookHistoryController implements BookhistoryApi {
         this.bookHistoryService = bookHistoryService;
     }
 
-
     @Override
-    public ResponseEntity<Void> createBookHistory(BookHistoryDTO bookHistoryDTO) {
-        bookHistoryService.create(bookHistoryDTO);
+    public ResponseEntity<Void> createBookHistory(BookHistoryDto bookHistoryDto) {
+        bookHistoryService.create(bookHistoryDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
@@ -48,59 +45,40 @@ public class BookHistoryController implements BookhistoryApi {
     }
 
     @Override
-    public ResponseEntity<List<BookHistoryDTO>> findAllBookHistory() {
+    public ResponseEntity<List<BookHistoryDto>> findAllBookHistory() {
         return ResponseEntity.ok(bookHistoryService.findAll());
     }
 
     @Override
-    public ResponseEntity<BookHistoryDTO> findByIdBookHistory(Long id) {
+    public ResponseEntity<BookHistoryDto> findByIdBookHistory(Long id) {
         return ResponseEntity.ok(bookHistoryService.findById(id));
     }
 
     @Override
-    public ResponseEntity<Void> patchBookHistory(BookHistoryDTO bookHistoryDTO) {
-        bookHistoryService.patch(bookHistoryDTO);
+    public ResponseEntity<Void> patchBookHistory(BookHistoryDto bookHistoryDto) {
+        bookHistoryService.patch(bookHistoryDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
     @Override
-    public ResponseEntity<Void> updateBookHistory(BookHistoryDTO bookHistoryDTO) {
-        bookHistoryService.update(bookHistoryDTO);
+    public ResponseEntity<Void> updateBookHistory(BookHistoryDto bookHistoryDto) {
+        bookHistoryService.update(bookHistoryDto);
         return new ResponseEntity<Void>( HttpStatus.OK );
     }
 
-    @RequestMapping(value = "/take_book/{book_id}/{user_id}", method = RequestMethod.POST)
-    public void takeBook(@PathVariable Long book_id, @PathVariable Long user_id){
-        BookHistoryDTO bookHistory = new BookHistoryDTO();
-        bookHistory.setBookID(book_id);
-        bookHistory.setUserID(user_id);
-        Date curDate = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-Mon-yy");
-        bookHistory.setStartDate(simpleDateFormat.format(curDate));
-        createBookHistory(bookHistory);
-    }
-
-    @RequestMapping(value = "/return_book/{book_id}/{user_id}", method = RequestMethod.PUT)
-    public void returnBook(@PathVariable Long book_id, @PathVariable Long user_id){
-        BookHistoryDTO bookHistory = bookHistoryService.findBookHistoryByBookAndUserIds(book_id, user_id);
-        Date curDate = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-Mon-yy");
-        bookHistory.setReturnDate(simpleDateFormat.format(curDate));
-        updateBookHistory(bookHistory);
-    }
-
-    @RequestMapping(value = "/book_history/{book_id}", method = RequestMethod.GET)
-    public List<BookHistoryDTO> getBookHistoryByBookId(@PathVariable Long book_id){
-        return bookHistoryService.findBookHistoryByBookId(book_id);
+    @RequestMapping(value = "/book_history/{bookId}", method = RequestMethod.GET)
+    public List<BookHistoryDto> getBookHistoryByBookId(@PathVariable Long bookId){
+        return bookHistoryService.findBookHistoryByBookId(bookId);
     }
 
     @RequestMapping(value = "/top10books", method = RequestMethod.GET)
-    public List<BookDTO> get10TheMostPopularBooks(){
+    public List<BookDto> get10TheMostPopularBooks(){
         return bookHistoryService.get10TheMostPopularBooks();
     }
 
     @RequestMapping(value = "/top10authors", method = RequestMethod.GET)
-    public List<AuthorDTO> get10TheMostPopularAuthors() {
+    public List<AuthorDto> get10TheMostPopularAuthors() {
         return bookHistoryService.get10TheMostPopularAuthors();
     }
+
 }

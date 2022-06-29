@@ -11,12 +11,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name= "books")
 public class Book implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,17 +28,14 @@ public class Book implements Serializable {
     private String publicationDate;
     @Column(name="status", nullable = false)
     private Boolean status;
-
     @ManyToMany
     @JoinTable(name="book_author",
             joinColumns = @JoinColumn(name="book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors;
-
     @OneToMany
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private List<BookHistory> bookHistoryList;
-
     @OneToMany
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private List<Feedback> feedbacks;
@@ -115,6 +112,9 @@ public class Book implements Serializable {
     }
 
     public List<BookHistory> getBookHistoryList() {
+        if(bookHistoryList == null){
+            bookHistoryList = new ArrayList<>();
+        }
         return bookHistoryList;
     }
 

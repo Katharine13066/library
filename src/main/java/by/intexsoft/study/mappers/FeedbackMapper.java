@@ -1,7 +1,7 @@
 package by.intexsoft.study.mappers;
 
 import by.intexsoft.study.daomodel.Feedback;
-import by.intexsoft.study.model.FeedbackDTO;
+import by.intexsoft.study.model.FeedbackDto;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -18,13 +18,15 @@ public interface FeedbackMapper {
 
     FeedbackMapper feedbackMapper = Mappers.getMapper(FeedbackMapper.class);
 
-    FeedbackDTO toDTO(Feedback feedback);
-    @InheritInverseConfiguration
+    FeedbackDto toDto(Feedback feedback);
 
-    Feedback fromDTO(FeedbackDTO feedbackDTO);
-    List<FeedbackDTO> toDTOs(List<Feedback> feedbacks);
+    @InheritInverseConfiguration
+    Feedback fromDto(FeedbackDto feedbackDto);
+
+    List<FeedbackDto> toDtos(List<Feedback> feedbacks);
 
     @InheritConfiguration
     @Mapping(target = "id", ignore = true)
-    void updateFeedbackFromDto(FeedbackDTO feedbackDTO, @MappingTarget Feedback feedback);
+    void updateFeedbackFromDto(FeedbackDto feedbackDto, @MappingTarget Feedback feedback);
+
 }

@@ -1,0 +1,21 @@
+put:
+  tags:
+    - books
+  summary: Take book
+  operationId: takeBook
+  parameters:
+    - name: bookId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+    - name: userId
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int64
+  responses:
+    '200':
+      description: OK

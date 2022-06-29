@@ -3,23 +3,17 @@ package by.intexsoft.study.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "User Entrity")
-public class UserDTO{
-
-    @Schema(description = "ID")
+public class UserDto {
+    @Schema(description = "Id")
     private Long id;
-
     @Schema(description = "User name")
     private String userName;
-
     @Schema(description = "Phone number")
     private String phoneNumber;
-
     @Schema(description = "Email")
     private String email;
-
     @Schema(description = "Birthday")
     private String birthday;
-
     @Schema(description = "Password Hash")
     private Long passwordHash;
 
